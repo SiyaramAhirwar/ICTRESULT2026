@@ -1138,7 +1138,7 @@ function createResultCard(student) {
             <div class="result-grid">
                 <!-- Semester 1 -->
                 <div class="result-semester">
-                    <h4><i class="fas fa-book-open"></i> Semester 1 (Nov 2024)</h4>
+                    <h4><i class="fas fa-book-open"></i> Semester 1 (Nov 2025)</h4>
                     ${Object.entries(student.semester1.subjects).map(([key, value]) => `
                         <div class="subject-row">
                             <span class="subject-name">${key.replace('NET_', 'NET ')}</span>
@@ -1153,7 +1153,7 @@ function createResultCard(student) {
                 
                 <!-- Semester 2 -->
                 <div class="result-semester">
-                    <h4><i class="fas fa-book-open"></i> Semester 2 (May 2025)</h4>
+                    <h4><i class="fas fa-book-open"></i> Semester 2 (June 2026)</h4>
                     ${Object.entries(student.semester2.subjects).map(([key, value]) => `
                         <div class="subject-row">
                             <span class="subject-name">${key.replace('NET_', 'NET ')}</span>

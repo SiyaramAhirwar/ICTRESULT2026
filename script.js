@@ -929,9 +929,6 @@ const studentData = [
 // ============================================================
 // DOM ELEMENTS
 // ============================================================
-const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
-const suggestions = document.getElementById('suggestions');
 const resultContainer = document.getElementById('resultContainer');
 const toppersGrid = document.getElementById('toppersGrid');
 const themeToggle = document.getElementById('themeToggle');
@@ -942,7 +939,6 @@ const navbar = document.getElementById('navbar');
 // ============================================================
 // THEME TOGGLE
 // ============================================================
-// Check saved theme
 const savedTheme = localStorage.getItem('theme') || 'light';
 document.documentElement.setAttribute('data-theme', savedTheme);
 updateThemeIcon(savedTheme);
@@ -972,7 +968,6 @@ hamburger.addEventListener('click', () => {
     navLinks.classList.toggle('active');
 });
 
-// Close menu on link click
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         hamburger.classList.remove('active');
@@ -992,73 +987,108 @@ window.addEventListener('scroll', () => {
 });
 
 // ============================================================
-// SEARCH FUNCTIONALITY
+// RESULT SECTION SEARCH
 // ============================================================
-let searchTimeout;
+const resultSearchInput = document.getElementById('resultSearchInput');
+const resultSearchBtn = document.getElementById('resultSearchBtn');
+const resultSuggestions = document.getElementById('resultSuggestions');
 
-searchInput.addEventListener('input', function() {
-    clearTimeout(searchTimeout);
+let resultSearchTimeout;
+
+resultSearchInput.addEventListener('input', function() {
+    clearTimeout(resultSearchTimeout);
     const query = this.value.trim().toLowerCase();
     
     if (query.length === 0) {
-        suggestions.classList.remove('active');
+        resultSuggestions.classList.remove('active');
+        showResultPlaceholder('Search for a Student', 'Enter name or enrollment number to view results');
         return;
     }
     
-    searchTimeout = setTimeout(() => {
+    resultSearchTimeout = setTimeout(() => {
         const results = studentData.filter(student => 
             student.name.toLowerCase().includes(query) ||
             student.id.toLowerCase().includes(query)
         );
         
-        showSuggestions(results, query);
+        showResultSuggestions(results, query);
     }, 200);
 });
 
-searchInput.addEventListener('keydown', function(e) {
+resultSearchInput.addEventListener('keydown', function(e) {
     if (e.key === 'Enter') {
         e.preventDefault();
         const query = this.value.trim().toLowerCase();
         if (query) {
-            performSearch(query);
+            performResultSearch(query);
+            resultSuggestions.classList.remove('active');
         }
     }
 });
 
-searchBtn.addEventListener('click', function() {
-    const query = searchInput.value.trim().toLowerCase();
+resultSearchBtn.addEventListener('click', function() {
+    const query = resultSearchInput.value.trim().toLowerCase();
     if (query) {
-        performSearch(query);
+        performResultSearch(query);
+        resultSuggestions.classList.remove('active');
     }
 });
 
-function showSuggestions(results, query) {
+function showResultSuggestions(results, query) {
     if (results.length === 0) {
-        suggestions.classList.remove('active');
+        resultSuggestions.classList.remove('active');
+        showResultPlaceholder('No Student Found', 'Please check the name or enrollment number');
         return;
     }
     
-    suggestions.innerHTML = results.slice(0, 8).map(student => `
+    resultSuggestions.innerHTML = results.slice(0, 8).map(student => `
         <div class="suggestion-item" data-id="${student.id}">
             <div>
                 <div class="s-name">${highlightMatch(student.name, query)}</div>
                 <div class="s-id">${student.id}</div>
             </div>
-            <span style="color: var(--accent-color); font-weight: 700;">${student.combined.percentage}%</span>
+            <span class="s-percentage">${student.combined.percentage}%</span>
         </div>
     `).join('');
     
-    suggestions.classList.add('active');
+    resultSuggestions.classList.add('active');
     
-    // Add click event to suggestions
-    document.querySelectorAll('.suggestion-item').forEach(item => {
+    document.querySelectorAll('.result-search-suggestions .suggestion-item').forEach(item => {
         item.addEventListener('click', function() {
             const id = this.dataset.id;
-            searchInput.value = id;
-            performSearch(id);
-            suggestions.classList.remove('active');
+            resultSearchInput.value = id;
+            performResultSearch(id);
+            resultSuggestions.classList.remove('active');
         });
     });
+}
+
+function performResultSearch(query) {
+    const results = studentData.filter(student => 
+        student.name.toLowerCase().includes(query) ||
+        student.id.toLowerCase().includes(query)
+    );
+    
+    if (results.length === 0) {
+        showResultPlaceholder('No Student Found', 'Please check the name or enrollment number and try again');
+        return;
+    }
+    
+    if (results.length === 1) {
+        displayResult(results[0]);
+    } else {
+        displayMultipleResults(results);
+    }
+}
+
+function showResultPlaceholder(title, message) {
+    resultContainer.innerHTML = `
+        <div class="result-placeholder">
+            <i class="fas fa-search fa-3x"></i>
+            <h3>${title}</h3>
+            <p>${message}</p>
+        </div>
+    `;
 }
 
 function highlightMatch(text, query) {
@@ -1069,37 +1099,6 @@ function highlightMatch(text, query) {
            text.slice(index, index + query.length) + 
            '</strong>' + 
            text.slice(index + query.length);
-}
-
-function performSearch(query) {
-    const results = studentData.filter(student => 
-        student.name.toLowerCase().includes(query) ||
-        student.id.toLowerCase().includes(query)
-    );
-    
-    if (results.length === 0) {
-        showNoResult();
-        return;
-    }
-    
-    if (results.length === 1) {
-        displayResult(results[0]);
-    } else {
-        displayMultipleResults(results);
-    }
-    
-    // Scroll to results
-    document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-}
-
-function showNoResult() {
-    resultContainer.innerHTML = `
-        <div class="result-placeholder">
-            <i class="fas fa-user-slash fa-3x"></i>
-            <h3>No Student Found</h3>
-            <p>Please check the name or enrollment number and try again</p>
-        </div>
-    `;
 }
 
 function displayMultipleResults(results) {
@@ -1180,7 +1179,6 @@ function createResultCard(student) {
 // TOPPERS SECTION
 // ============================================================
 function displayToppers() {
-    // Sort by combined percentage (highest first)
     const sorted = [...studentData].sort((a, b) => b.combined.percentage - a.combined.percentage);
     const toppers = sorted.slice(0, 10);
     
@@ -1192,7 +1190,7 @@ function displayToppers() {
         const isTop3 = rank <= 3;
         
         return `
-            <div class="topper-card ${rankClasses[index]} fade-in" onclick="performSearch('${student.id}')" style="cursor: pointer;">
+            <div class="topper-card ${rankClasses[index]} fade-in" onclick="performResultSearch('${student.id}')" style="cursor: pointer;">
                 <div class="rank-badge">#${rank}</div>
                 <div class="rank-icon">${rankEmojis[index]}</div>
                 <h4>${student.name}</h4>
@@ -1219,13 +1217,11 @@ function updateStatistics() {
     const highest = Math.max(...percentages);
     const lowest = Math.min(...percentages);
     
-    // Update Hero Stats
     document.getElementById('totalStudents').textContent = total;
     document.getElementById('passCount').textContent = passed;
     document.getElementById('failCount').textContent = failed;
     document.getElementById('avgPercentage').textContent = avg.toFixed(1) + '%';
     
-    // Update Statistics Section
     document.getElementById('statTotal').textContent = total;
     document.getElementById('statPass').textContent = passed;
     document.getElementById('statFail').textContent = failed;
@@ -1261,18 +1257,18 @@ window.addEventListener('scroll', () => {
 // KEYBOARD SHORTCUTS
 // ============================================================
 document.addEventListener('keydown', (e) => {
-    // Ctrl + K or Cmd + K to focus search
+    // Ctrl + K to focus result search
     if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
         e.preventDefault();
-        searchInput.focus();
-        searchInput.select();
+        resultSearchInput.focus();
+        resultSearchInput.select();
     }
     
     // Escape to clear search
     if (e.key === 'Escape') {
-        searchInput.value = '';
-        searchInput.blur();
-        suggestions.classList.remove('active');
+        resultSearchInput.value = '';
+        resultSearchInput.blur();
+        resultSuggestions.classList.remove('active');
     }
 });
 
@@ -1282,12 +1278,8 @@ document.addEventListener('keydown', (e) => {
 function init() {
     displayToppers();
     updateStatistics();
-    
-    // Show first student result by default (optional)
-    // displayResult(studentData[0]);
 }
 
-// Run on page load
 document.addEventListener('DOMContentLoaded', init);
 
 // ============================================================
@@ -1295,5 +1287,236 @@ document.addEventListener('DOMContentLoaded', init);
 // ============================================================
 console.log('%c🎓 SSR-GSP Result Portal Loaded!', 'font-size: 20px; font-weight: bold; color: #6c63ff;');
 console.log(`%c📊 Total Students: ${studentData.length}`, 'font-size: 14px; color: #4a4a6a;');
-console.log('%c🔍 Search: Type name or enrollment number', 'font-size: 12px; color: #888;');
+console.log('%c🔍 Search: Type name or enrollment number in Result Section', 'font-size: 12px; color: #888;');
 console.log('%c⌨️ Shortcut: Ctrl+K to focus search', 'font-size: 12px; color: #888;');
+
+// ============================================================
+// QR SCANNER - DIRECT URL REDIRECT
+// ============================================================
+
+const video = document.getElementById('video');
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const scannerLine = document.getElementById('scannerLine');
+const scannerOverlay = document.querySelector('.scanner-overlay');
+const scannerPlaceholder = document.getElementById('scannerPlaceholder');
+const scannerStatus = document.getElementById('scannerStatus');
+const startBtn = document.getElementById('startScanner');
+const stopBtn = document.getElementById('stopScanner');
+const uploadBtn = document.getElementById('uploadQR');
+const qrImageInput = document.getElementById('qrImageInput');
+
+let scanning = false;
+let stream = null;
+let animationId = null;
+
+function updateStatus(message, type = 'info') {
+    const icons = {
+        info: 'fa-info-circle',
+        success: 'fa-check-circle',
+        error: 'fa-exclamation-circle',
+        loading: 'fa-spinner'
+    };
+    
+    const classes = {
+        info: 'status-info',
+        success: 'status-success',
+        error: 'status-error',
+        loading: 'status-loading'
+    };
+    
+    scannerStatus.innerHTML = `
+        <div class="${classes[type]}">
+            <i class="fas ${icons[type]} ${type === 'loading' ? 'fa-spin' : ''}"></i>
+            <span>${message}</span>
+        </div>
+    `;
+}
+
+startBtn.addEventListener('click', async () => {
+    try {
+        updateStatus('Requesting camera access...', 'loading');
+        
+        stream = await navigator.mediaDevices.getUserMedia({
+            video: { 
+                facingMode: 'environment',
+                width: { ideal: 640 },
+                height: { ideal: 480 }
+            }
+        });
+        
+        video.srcObject = stream;
+        video.classList.add('active');
+        scannerLine.classList.add('active');
+        scannerOverlay.classList.add('active');
+        scannerPlaceholder.classList.add('hidden');
+        
+        scanning = true;
+        startBtn.disabled = true;
+        startBtn.style.display = 'none';
+        stopBtn.style.display = 'flex';
+        
+        updateStatus('Scanning QR Code... Hold certificate steady', 'loading');
+        
+        scanQRCode();
+        
+    } catch (error) {
+        console.error('Camera error:', error);
+        updateStatus(
+            'Camera access denied. Please allow camera permissions or upload QR image.', 
+            'error'
+        );
+        startBtn.disabled = false;
+    }
+});
+
+function scanQRCode() {
+    if (!scanning) return;
+    
+    try {
+        if (video.readyState === video.HAVE_ENOUGH_DATA) {
+            canvas.width = video.videoWidth || 640;
+            canvas.height = video.videoHeight || 480;
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                inversionAttempts: "dontInvert",
+            });
+            
+            if (code && code.data) {
+                handleQRCodeData(code.data);
+                stopScanner();
+                return;
+            }
+        }
+    } catch (e) {}
+    
+    animationId = requestAnimationFrame(scanQRCode);
+}
+
+function handleQRCodeData(data) {
+    console.log('QR Code Data:', data);
+    updateStatus('QR Code detected! Processing...', 'loading');
+    
+    const urlPattern = /^https?:\/\/[^\s]+/;
+    const match = data.match(urlPattern);
+    
+    if (match) {
+        const redirectUrl = match[0];
+        console.log('Redirecting to:', redirectUrl);
+        
+        scannerStatus.innerHTML = `
+            <div class="status-success">
+                <i class="fas fa-check-circle"></i>
+                <span>✅ URL Found: <strong style="word-break: break-all;">${redirectUrl.substring(0, 60)}${redirectUrl.length > 60 ? '...' : ''}</strong></span>
+            </div>
+            <div style="margin-top: 8px; color: var(--text-secondary); font-size: 0.9rem;">
+                <i class="fas fa-external-link-alt"></i> 
+                Redirecting to marksheet...
+            </div>
+        `;
+        
+        setTimeout(() => {
+            window.open(redirectUrl, '_blank');
+            updateStatus('✅ Marksheet opened in new tab.', 'success');
+        }, 1000);
+        
+    } else {
+        updateStatus('❌ Invalid QR Code. Please scan a valid certificate QR code.', 'error');
+        
+        scannerStatus.innerHTML += `
+            <div style="margin-top: 12px; padding: 12px; background: var(--bg-secondary); border-radius: 8px; font-size: 0.8rem; word-break: break-all; color: var(--text-muted);">
+                <strong>Raw Data:</strong> ${data.substring(0, 150)}${data.length > 150 ? '...' : ''}
+            </div>
+        `;
+    }
+}
+
+function stopScanner() {
+    scanning = false;
+    
+    if (animationId) {
+        cancelAnimationFrame(animationId);
+        animationId = null;
+    }
+    
+    if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+        stream = null;
+    }
+    
+    video.classList.remove('active');
+    scannerLine.classList.remove('active');
+    scannerOverlay.classList.remove('active');
+    scannerPlaceholder.classList.remove('hidden');
+    video.srcObject = null;
+    
+    startBtn.disabled = false;
+    startBtn.style.display = 'flex';
+    stopBtn.style.display = 'none';
+    
+    updateStatus('Scanner stopped. Ready to scan again.', 'info');
+}
+
+stopBtn.addEventListener('click', stopScanner);
+
+uploadBtn.addEventListener('click', () => {
+    qrImageInput.click();
+});
+
+qrImageInput.addEventListener('change', async (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    
+    updateStatus('Reading image...', 'loading');
+    
+    try {
+        const image = new Image();
+        const reader = new FileReader();
+        
+        reader.onload = async (event) => {
+            image.src = event.target.result;
+            await image.decode();
+            
+            canvas.width = image.width;
+            canvas.height = image.height;
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const code = jsQR(imageData.data, imageData.width, imageData.height, {
+                inversionAttempts: "dontInvert",
+            });
+            
+            if (code && code.data) {
+                updateStatus('QR Code found in image!', 'success');
+                handleQRCodeData(code.data);
+            } else {
+                updateStatus('No QR code found in image. Please upload a clear QR code image.', 'error');
+            }
+        };
+        
+        reader.readAsDataURL(file);
+        
+    } catch (error) {
+        console.error('Error reading image:', error);
+        updateStatus('Error reading image. Please try again.', 'error');
+    }
+    
+    qrImageInput.value = '';
+});
+
+document.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'q') {
+        e.preventDefault();
+        if (!scanning) {
+            startBtn.click();
+        } else {
+            stopBtn.click();
+        }
+    }
+});
+
+console.log('%c📷 QR Scanner Ready!', 'font-size: 16px; font-weight: bold; color: #4285f4;');
+console.log('%c📌 QR Code will redirect to the URL found in the QR', 'font-size: 12px; color: #888;');
+console.log('%c⌨️ Shortcut: Ctrl+Q to start/stop scanner', 'font-size: 12px; color: #888;');

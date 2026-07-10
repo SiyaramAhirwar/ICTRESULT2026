@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SSR-GSP Result Portal 2025-26</title>
+    <title>SSRGSP ICT Result Portal May-2025</title>
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <!-- QR Scanner Library -->
+    <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.js"></script>
     
     <!-- CSS will be linked here -->
     <link rel="stylesheet" href= "style.css">
@@ -23,13 +25,14 @@
             <div class="nav-logo">
                 <i class="fas fa-graduation-cap"></i>
                 <span>SSRGSP</span>
-                <small>Result Portal</small>
+                <small>ICT Result Portal</small>
             </div>
             
             <div class="nav-links" id="navLinks">
                 <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
                 <a href="#results"><i class="fas fa-search"></i> Results</a>
-                <a href="#toppers"><i class="fas fa-trophy"></i> Toppers</a>
+                <a href="#qrScanner"><i class="fas fa-qrcode"></i> Scanner</a>
+                <a href="#toppers"><i class="fas fa-trophy"></i> Top Performers</a>
                 <a href="#statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
                 <a href="#about"><i class="fas fa-info-circle"></i> About</a>
             </div>
@@ -47,73 +50,147 @@
         </div>
     </nav>
 
-    <!-- ============================================================
-    HERO SECTION
-    ============================================================ -->
-    <section class="hero" id="home">
-        <div class="hero-bg-animation">
-            <div class="orb orb-1"></div>
-            <div class="orb orb-2"></div>
-            <div class="orb orb-3"></div>
+   <!-- ============================================================
+   HERO SECTION - WITHOUT SEARCH + WITH DESCRIPTION
+   ============================================================ -->
+<section class="hero" id="home">
+    <div class="hero-bg-animation">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+    
+    <div class="hero-content">
+        <div class="hero-badge">
+            <i class="fas fa-star"></i>
+            SANT SHIROMANI RAVIDAS GLOBAL SKILLS PARK, BHOPAL
         </div>
+        <h1>SSRGSP <span> ICT Result Portal</span></h1>
         
-        <div class="hero-content">
-            <div class="hero-badge">
-                <i class="fas fa-star"></i>
-                Advanced Networking & System Administration
+        <!-- Description - New -->
+        <div class="hero-description">
+            <p class="hero-main-desc">
+                <i class="fas fa-network-wired"></i> 
+                ICT Result Portal provides quick, secure, and reliable access to
+                 trainee results, assessments, and academic performance in one place.
+            <div class="hero-features">
+                <span><i class="fas fa-check-circle"></i> Networking skills</span>
+                <span><i class="fas fa-check-circle"></i> Desktop PC & Project</span>
+                <span><i class="fas fa-check-circle"></i> Virtualization</span>
+                <span><i class="fas fa-check-circle"></i> Application development</span>
+                <span><i class="fas fa-check-circle"></i> Software development</span>
+                <span><i class="fas fa-check-circle"></i> System Administration</span>
+                <span><i class="fas fa-check-circle"></i> AI Generative</span>
+                <span><i class="fas fa-check-circle"></i> Soft skills</span>
             </div>
-            <h1>ICT <span> Result Portal</span></h1>
-            <p>Sant Shiromani Ravidas Global Skills Park<br>
-            <small>Assessment Management - Consolidated Term End Results 2025-26</small></p>
+        </div>
+
+        <!-- Hero Stats - Keep as is -->
+        <div class="hero-stats-mini">
+            <div class="stat-mini">
+                <span class="stat-number" id="totalStudents">51</span>
+                <span class="stat-label">Total Students</span>
+            </div>
+            <div class="stat-mini">
+                <span class="stat-number" id="passCount">43</span>
+                <span class="stat-label">Passed</span>
+            </div>
+            <div class="stat-mini">
+                <span class="stat-number" id="failCount">8</span>
+                <span class="stat-label">Failed</span>
+            </div>
+            <div class="stat-mini">
+                <span class="stat-number" id="avgPercentage">78.4%</span>
+                <span class="stat-label">Average</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+  <!-- ============================================================
+   RESULT SECTION - WITH SEARCH
+   ============================================================ -->
+<section class="results-section" id="results">
+    <div class="section-header">
+        <h2><i class="fas fa-user-graduate"></i> Student Results</h2>
+        <p>Search and view complete academic performance</p>
+    </div>
+
+    <!-- Result Section Search Bar -->
+    <div class="result-search-container">
+        <div class="result-search-box">
+            <i class="fas fa-search search-icon"></i>
+            <input type="text" id="resultSearchInput" placeholder="Search by Name or Enrollment No..." autocomplete="off">
+            <button id="resultSearchBtn"><i class="fas fa-arrow-right"></i></button>
+        </div>
+        <div class="result-search-suggestions" id="resultSuggestions"></div>
+    </div>
+
+    <!-- Result Display -->
+    <div class="result-card-container" id="resultContainer">
+        <div class="result-placeholder">
+            <i class="fas fa-search fa-3x"></i>
+            <h3>Search for a Student</h3>
+            <p>Enter name or enrollment number above to view results</p>
+        </div>
+    </div>
+</section>
+
+    
+<!-- ============================================================
+   QR SCANNER SECTION - COMPACT
+   ============================================================ -->
+<section class="qr-scanner-section" id="qrScanner">
+    <div class="section-header">
+        <h2><i class="fas fa-qrcode"></i> Certificate Scanner</h2>
+        <p>Scan QR code on your certificate to view marksheet</p>
+    </div>
+
+    <div class="qr-scanner-wrapper">
+        <!-- Scanner Box - Compact -->
+        <div class="scanner-box" id="scannerBox">
+            <div class="scanner-overlay">
+                <div class="scanner-frame">
+                    <div class="scanner-corner top-left"></div>
+                    <div class="scanner-corner top-right"></div>
+                    <div class="scanner-corner bottom-left"></div>
+                    <div class="scanner-corner bottom-right"></div>
+                </div>
+                <div class="scanner-line" id="scannerLine"></div>
+            </div>
+            <video id="video" autoplay playsinline></video>
+            <canvas id="canvas" style="display: none;"></canvas>
             
-            <div class="hero-search">
-                <div class="search-container">
-                    <i class="fas fa-search search-icon"></i>
-                    <input type="text" id="searchInput" placeholder="Search by Name or Enrollment No..." autocomplete="off">
-                    <button id="searchBtn"><i class="fas fa-arrow-right"></i></button>
-                </div>
-                <div class="search-suggestions" id="suggestions"></div>
-            </div>
-
-            <div class="hero-stats-mini">
-                <div class="stat-mini">
-                    <span class="stat-number" id="totalStudents">51</span>
-                    <span class="stat-label">Total Students</span>
-                </div>
-                <div class="stat-mini">
-                    <span class="stat-number" id="passCount">43</span>
-                    <span class="stat-label">Passed</span>
-                </div>
-                <div class="stat-mini">
-                    <span class="stat-number" id="failCount">8</span>
-                    <span class="stat-label">Failed</span>
-                </div>
-                <div class="stat-mini">
-                    <span class="stat-number" id="avgPercentage">78.4%</span>
-                    <span class="stat-label">Average</span>
-                </div>
+            <div class="scanner-placeholder" id="scannerPlaceholder">
+                <i class="fas fa-qrcode"></i>
+                <h3>Ready to Scan</h3>
+                <p>Click "Start Scanner" to begin</p>
             </div>
         </div>
-    </section>
 
-    <!-- ============================================================
-    RESULT SECTION
-    ============================================================ -->
-    <section class="results-section" id="results">
-        <div class="section-header">
-            <h2><i class="fas fa-user-graduate"></i> Student Results</h2>
-            <p>Search and view complete academic performance</p>
+        <!-- Scanner Controls - Compact -->
+        <div class="scanner-controls-compact">
+            <button id="startScanner" class="scanner-btn">
+                <i class="fas fa-camera"></i> Start scanner
+            </button>
+            <button id="stopScanner" class="scanner-btn scanner-stop">
+                <i class="fas fa-stop"></i> Stop
+            </button>
+            <button id="uploadQR" class="scanner-btn scanner-upload">
+                <i class="fas fa-upload"></i> Upload image
+            </button>
+            <input type="file" id="qrImageInput" accept="image/*" style="display: none;">
         </div>
 
-        <div class="result-card-container" id="resultContainer">
-            <!-- Result will be displayed here via JavaScript -->
-            <div class="result-placeholder">
-                <i class="fas fa-search fa-3x"></i>
-                <h3>Search for a Student Name or Enrollment</h3>
-                <p>Enter name or enrollment number above to view results</p>
+        <!-- Scanner Status - Compact -->
+        <div class="scanner-status-box" id="scannerStatus">
+            <div class="status-info">
+                <i class="fas fa-info-circle"></i>
+                <span>Point camera at QR code or upload image</span>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- ============================================================
     TOPPERS SECTION
@@ -121,7 +198,7 @@
     <section class="toppers-section" id="toppers">
         <div class="section-header">
             <h2><i class="fas fa-trophy"></i> Top Performers</h2>
-            <p>Academic excellence recognizes the best</p>
+            <p>Academic excellence recognizes Top 10 ICT Trainees</p>
         </div>
 
         <div class="toppers-grid" id="toppersGrid">
@@ -227,7 +304,7 @@
             <div class="footer-brand">
                 <i class="fas fa-graduation-cap"></i>
                 <span>SSRGSP Result Portal</span>
-                <p>Advancing skills, building futures</p>
+                <p>Only for ICT May 2025 Batch Trainees</p>
             </div>
             <div class="footer-links">
                 <a href="#home">Home</a>

@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSR-GSP Result Portal 2025-26</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS will be linked here -->
+    <link rel="stylesheet" href= "D:\RESULT SITE\style.css">
+</head>
+<body>
+
+    <!-- ============================================================
+    NAVIGATION
+    ============================================================ -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>SSRGSP</span>
+                <small>Result Portal</small>
+            </div>
+            
+            <div class="nav-links" id="navLinks">
+                <a href="#home" class="active"><i class="fas fa-home"></i> Home</a>
+                <a href="#results"><i class="fas fa-search"></i> Results</a>
+                <a href="#toppers"><i class="fas fa-trophy"></i> Toppers</a>
+                <a href="#statistics"><i class="fas fa-chart-bar"></i> Statistics</a>
+                <a href="#about"><i class="fas fa-info-circle"></i> About</a>
+            </div>
+
+            <div class="nav-controls">
+                <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="hamburger" id="hamburger" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ============================================================
+    HERO SECTION
+    ============================================================ -->
+    <section class="hero" id="home">
+        <div class="hero-bg-animation">
+            <div class="orb orb-1"></div>
+            <div class="orb orb-2"></div>
+            <div class="orb orb-3"></div>
+        </div>
+        
+        <div class="hero-content">
+            <div class="hero-badge">
+                <i class="fas fa-star"></i>
+                Advanced Networking & System Administration
+            </div>
+            <h1>ICT <span> Result Portal</span></h1>
+            <p>Sant Shiromani Ravidas Global Skills Park<br>
+            <small>Assessment Management - Consolidated Term End Results 2025-26</small></p>
+            
+            <div class="hero-search">
+                <div class="search-container">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="searchInput" placeholder="Search by Name or Enrollment No..." autocomplete="off">
+                    <button id="searchBtn"><i class="fas fa-arrow-right"></i></button>
+                </div>
+                <div class="search-suggestions" id="suggestions"></div>
+            </div>
+
+            <div class="hero-stats-mini">
+                <div class="stat-mini">
+                    <span class="stat-number" id="totalStudents">51</span>
+                    <span class="stat-label">Total Students</span>
+                </div>
+                <div class="stat-mini">
+                    <span class="stat-number" id="passCount">43</span>
+                    <span class="stat-label">Passed</span>
+                </div>
+                <div class="stat-mini">
+                    <span class="stat-number" id="failCount">8</span>
+                    <span class="stat-label">Failed</span>
+                </div>
+                <div class="stat-mini">
+                    <span class="stat-number" id="avgPercentage">78.4%</span>
+                    <span class="stat-label">Average</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    RESULT SECTION
+    ============================================================ -->
+    <section class="results-section" id="results">
+        <div class="section-header">
+            <h2><i class="fas fa-user-graduate"></i> Student Results</h2>
+            <p>Search and view complete academic performance</p>
+        </div>
+
+        <div class="result-card-container" id="resultContainer">
+            <!-- Result will be displayed here via JavaScript -->
+            <div class="result-placeholder">
+                <i class="fas fa-search fa-3x"></i>
+                <h3>Search for a Student Name or Enrollment</h3>
+                <p>Enter name or enrollment number above to view results</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    TOPPERS SECTION
+    ============================================================ -->
+    <section class="toppers-section" id="toppers">
+        <div class="section-header">
+            <h2><i class="fas fa-trophy"></i> Top Performers</h2>
+            <p>Academic excellence recognizes the best</p>
+        </div>
+
+        <div class="toppers-grid" id="toppersGrid">
+            <!-- Toppers will be rendered by JavaScript -->
+        </div>
+    </section>
+
+    <!-- ============================================================
+    STATISTICS SECTION
+    ============================================================ -->
+    <section class="statistics-section" id="statistics">
+        <div class="section-header">
+            <h2><i class="fas fa-chart-pie"></i> Overall Statistics</h2>
+            <p>Comprehensive performance analysis</p>
+        </div>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-users"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statTotal">51</span>
+                    <span class="stat-name">Total Students</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statPass">43</span>
+                    <span class="stat-name">Passed</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-times-circle"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statFail">8</span>
+                    <span class="stat-name">Failed</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-percent"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statAvg">78.4%</span>
+                    <span class="stat-name">Average Percentage</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-arrow-up"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statHighest">95.0%</span>
+                    <span class="stat-name">Highest Percentage</span>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fas fa-arrow-down"></i></div>
+                <div class="stat-info">
+                    <span class="stat-value" id="statLowest">0.0%</span>
+                    <span class="stat-name">Lowest Percentage</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    ABOUT SECTION
+    ============================================================ -->
+    <section class="about-section" id="about">
+        <div class="section-header">
+            <h2><i class="fas fa-info-circle"></i> About This Portal</h2>
+            <p>Sant Shiromani Ravidas Global Skills Park</p>
+        </div>
+
+        <div class="about-content">
+            <div class="about-card">
+                <i class="fas fa-university"></i>
+                <h3>SSR-GSP</h3>
+                <p>Sant Shiromani Ravidas Global Skills Park is a premier skill development institute dedicated to providing world-class technical education.</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-code"></i>
+                <h3>Course</h3>
+                <p>Advanced Networking and System Administration - Comprehensive training in network infrastructure and system management.</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-calendar-alt"></i>
+                <h3>Academic Year</h3>
+                <p>May 2025 - June 2026<br>
+                Semester 1 & 2 Consolidated Results</p>
+            </div>
+            <div class="about-card">
+                <i class="fas fa-database"></i>
+                <h3>Data Source</h3>
+                <p>Official SSR-GSP Assessment Management System<br>
+                Authentic consolidated term-end results</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+    FOOTER
+    ============================================================ -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <i class="fas fa-graduation-cap"></i>
+                <span>SSRGSP Result Portal</span>
+                <p>Advancing skills, building futures</p>
+            </div>
+            <div class="footer-links">
+                <a href="#home">Home</a>
+                <a href="#results">Results</a>
+                <a href="#toppers">Toppers</a>
+                <a href="#statistics">Statistics</a>
+                <a href="#about">About</a>
+            </div>
+            <div class="footer-social">
+                <a href="https://www.facebook.com/OfficialSSRGSP?mibextid=rS40aB7S9Ucbxw6v" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="https://x.com/SSRGSPOfficial" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="https://www.linkedin.com/company/ssrgsp/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="http://www.youtube.com/@SSRGlobalSkillsPark-l1y" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 Siyaram Ahirwar (ICT Trainee). All rights reserved.  | Designed and Developed by Siyaram Ahirwar</p>
+        </div>
+    </footer>
+
+    <!-- ============================================================
+    JAVASCRIPT
+    ============================================================ -->
+    <script src="script.js"></script>
+</body>
+</html>

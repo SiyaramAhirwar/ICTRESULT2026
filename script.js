@@ -1280,7 +1280,7 @@ function createResultCard(student) {
 }
 
 // ============================================================
-// QR CODE GENERATOR
+// QR CODE GENERATOR - LIVE WEBSITE (FIXED)
 // ============================================================
 function generateQRCode(studentId) {
     const container = document.getElementById('qrCodeContainer');
@@ -1289,9 +1289,11 @@ function generateQRCode(studentId) {
     // Clear previous QR
     container.innerHTML = '';
     
-    // Build URL with student ID
-    const baseUrl = window.location.href.split('?')[0].split('#')[0];
+    // === LIVE WEBSITE URL ===
+    const baseUrl = 'https://iyaramahirwar.github.io/ICTRESULT2026/index.html';
     const qrUrl = baseUrl + '?id=' + encodeURIComponent(studentId);
+    
+    console.log('✅ QR URL:', qrUrl);
     
     // Generate QR Code
     try {
@@ -1301,11 +1303,11 @@ function generateQRCode(studentId) {
             height: 80,
             colorDark: "#1a1a2e",
             colorLight: "#ffffff",
-            correctLevel: QRCode.CorrectLevel.H  // High error correction
+            correctLevel: QRCode.CorrectLevel.H
         });
     } catch (e) {
-        // Fallback if QRCode library not loaded
         container.innerHTML = `<span style="font-size: 0.6rem; color: #999;">QR</span>`;
+        console.error('QR Error:', e);
     }
 }
 

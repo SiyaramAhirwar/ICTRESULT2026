@@ -1123,10 +1123,15 @@ function createResultCard(student) {
     
     return `
         <div class="result-card marksheet-card fade-in">
-            <!-- Header -->
+            <!-- PRINT ELEMENTS -->
+            <div class="print-watermark-logo"></div>
+            <div class="print-shadow-blue"></div>
+            <div class="print-shadow-orange"></div>
+            
+            <!-- HEADER -->
             <div class="marksheet-header">
                 <div class="marksheet-institute">
-                    <h2>Sant Shiromani Ravidas Global Skills Park (SSRGSP)</h2>
+                    <h2>SANT SHIROMANI RAVIDAS GLOBAL SKILLS PARK</h2>
                     <p>Bhopal, Madhya Pradesh</p>
                 </div>
                 <div class="marksheet-title">
@@ -1138,14 +1143,14 @@ function createResultCard(student) {
                 </div>
             </div>
 
-            <!-- Student Summary -->
+            <!-- STUDENT INFO - Single Line (Name Left | Enrollment Right) -->
             <div class="marksheet-student-info">
                 <div class="student-detail">
-                    <span class="label">Name</span>
+                    <span class="label">Student Name</span>
                     <span class="value">${student.name}</span>
                 </div>
                 <div class="student-detail">
-                    <span class="label">Enrollment</span>
+                    <span class="label">Enrollment No.</span>
                     <span class="value">${student.id}</span>
                 </div>
                 <div class="student-detail">
@@ -1156,7 +1161,7 @@ function createResultCard(student) {
                 </div>
             </div>
 
-            <!-- Academic Records -->
+            <!-- ACADEMIC RECORDS -->
             <div class="marksheet-academic">
                 <!-- Semester 1 -->
                 <div class="marksheet-semester">
@@ -1167,9 +1172,9 @@ function createResultCard(student) {
                     <table class="marksheet-table">
                         <thead>
                             <tr>
-                                <th>Paper Code</th>
+                                <th>Code</th>
                                 <th>Paper Name</th>
-                                <th>Obj Marks</th>
+                                <th>Marks</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1183,7 +1188,7 @@ function createResultCard(student) {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="2"><strong>Total Marks</strong></td>
+                                <td colspan="2"><strong>Total</strong></td>
                                 <td><strong>${student.semester1.total}</strong></td>
                             </tr>
                             <tr>
@@ -1203,9 +1208,9 @@ function createResultCard(student) {
                     <table class="marksheet-table">
                         <thead>
                             <tr>
-                                <th>Paper Code</th>
+                                <th>Code</th>
                                 <th>Paper Name</th>
-                                <th>Obj Marks</th>
+                                <th>Marks</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1219,7 +1224,7 @@ function createResultCard(student) {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="2"><strong>Total Marks</strong></td>
+                                <td colspan="2"><strong>Total</strong></td>
                                 <td><strong>${student.semester2.total}</strong></td>
                             </tr>
                             <tr>
@@ -1231,10 +1236,10 @@ function createResultCard(student) {
                 </div>
             </div>
 
-            <!-- Grand Total -->
+            <!-- GRAND TOTAL - Single Line (Total Left | Percentage Right) -->
             <div class="marksheet-grand-total">
                 <div class="grand-total-left">
-                    <span class="grand-label"><i class="fas fa-star"></i> Grand Total Marks</span>
+                    <span class="grand-label">Grand Total</span>
                     <span class="grand-value">${student.combined.total}</span>
                 </div>
                 <div class="grand-total-right">
@@ -1243,27 +1248,28 @@ function createResultCard(student) {
                 </div>
             </div>
 
-            <!-- Footer with QR Code -->
+            <!-- FOOTER - QR Code in Center -->
             <div class="marksheet-footer">
                 <div class="footer-left">
                     <div class="sign-line">
                         <span>Controller of Examinations</span>
-                        <span>SSR-GSP, Bhopal</span>
+                        <span>SSRGSP, Bhopal</span>
+                    </div>
+                </div>
+                <div class="footer-center">
+                    <div class="footer-qr">
+                        <div id="qrCodeContainer"></div>
+                        <span class="qr-label">Scan to verify</span>
                     </div>
                 </div>
                 <div class="footer-right">
                     <div class="footer-date">
-                        <span>Generated on: ${new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
-                    </div>
-                    <!-- QR CODE - Footer Right Corner -->
-                    <div class="footer-qr">
-                        <div id="qrCodeContainer"></div>
-                        <span class="qr-label">Scan to view marksheet</span>
+                        <span>${new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Action Buttons -->
+            <!-- ACTION BUTTONS (Hidden in Print) -->
             <div class="marksheet-actions">
                 <button onclick="printResult()" class="action-btn print-btn" title="Print Marksheet">
                     <i class="fas fa-print"></i> Print
@@ -1271,9 +1277,7 @@ function createResultCard(student) {
                 <button onclick="downloadPDF()" class="action-btn pdf-btn" title="Download PDF">
                     <i class="fas fa-file-pdf"></i> PDF
                 </button>
-                <button onclick="shareResult()" class="action-btn share-btn" title="Share Marksheet">
-                    <i class="fas fa-share-alt"></i> Share
-                </button>
+                
             </div>
         </div>
     `;

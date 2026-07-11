@@ -345,5 +345,23 @@
     JAVASCRIPT
     ============================================================ -->
     <script src="script.js"></script>
+
+    <!-- Hidden SVG for watermark (visible only in print) -->
+<div style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" id="gspLogoWatermark" viewBox="0 0 200 200">
+        <defs>
+            <radialGradient id="logoGrad" cx="50%" cy="50%" r="50%">
+                <stop offset="0%" style="stop-color:#8B0000;stop-opacity:0.3"/>
+                <stop offset="100%" style="stop-color:#8B0000;stop-opacity:0.05"/>
+            </radialGradient>
+        </defs>
+        <circle cx="100" cy="100" r="90" fill="url(#logoGrad)"/>
+        <text x="50%" y="55%" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="#8B0000" text-anchor="middle" opacity="0.15">GSP</text>
+        <text x="50%" y="75%" font-family="Arial, sans-serif" font-size="12" fill="#8B0000" text-anchor="middle" opacity="0.10">SSR-GSP</text>
+        <circle cx="100" cy="100" r="85" fill="none" stroke="#8B0000" stroke-width="0.5" opacity="0.08"/>
+        <circle cx="100" cy="100" r="70" fill="none" stroke="#8B0000" stroke-width="0.5" opacity="0.06"/>
+        <circle cx="100" cy="100" r="55" fill="none" stroke="#8B0000" stroke-width="0.5" opacity="0.04"/>
+    </svg>
+</div>
 </body>
 </html>

@@ -1106,10 +1106,15 @@ function displayMultipleResults(results) {
 }
 
 // ============================================================
-// RESULT CARD GENERATOR - WITH PRINT, PDF, SHARE BUTTONS
+// RESULT CARD GENERATOR - MARKSHEET + QR CODE
 // ============================================================
 function displayResult(student) {
     resultContainer.innerHTML = createResultCard(student);
+    
+    // Generate QR Code after card is rendered
+    setTimeout(function() {
+        generateQRCode(student.id);
+    }, 100);
 }
 
 function createResultCard(student) {
@@ -1117,73 +1122,248 @@ function createResultCard(student) {
     const statusClass = student.combined.finalStatus.includes('PASS') ? 'status-pass' : 'status-fail';
     
     return `
-        <div class="result-card fade-in">
-            <div class="result-header">
-                <div class="result-student-info">
-                    <h3>${student.name}</h3>
-                    <div class="enrollment"><i class="fas fa-id-card"></i> ${student.id}</div>
+        <div class="result-card marksheet-card fade-in">
+            <!-- Header -->
+            <div class="marksheet-header">
+                <div class="marksheet-institute">
+                    <h2>Sant Shiromani Ravidas Global Skills Park (SSRGSP)</h2>
+                    <p>Bhopal, Madhya Pradesh</p>
                 </div>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
-                    <span class="result-rank-badge ${rankClass}">
-                        <i class="fas fa-trophy"></i> Rank #${student.combined.rank}
-                    </span>
-                    <span class="result-status ${statusClass}">
-                        <i class="fas ${student.combined.finalStatus.includes('PASS') ? 'fa-check' : 'fa-times'}"></i>
+                <div class="marksheet-title">
+                    <h3>Student Marksheet</h3>
+                    <span class="marksheet-status ${statusClass}">
+                        <i class="fas ${student.combined.finalStatus.includes('PASS') ? 'fa-check-circle' : 'fa-times-circle'}"></i>
                         ${student.combined.finalStatus}
                     </span>
-                    <!-- ===== PRINT, PDF, SHARE BUTTONS ===== -->
-                    <button onclick="printResult()" class="action-btn print-btn" title="Print Result">
-                        <i class="fas fa-print"></i>
-                    </button>
-                    <button onclick="downloadPDF()" class="action-btn pdf-btn" title="Download PDF">
-                        <i class="fas fa-file-pdf"></i>
-                    </button>
-                    <button onclick="shareResult()" class="action-btn share-btn" title="Share Result">
-                        <i class="fas fa-share-alt"></i>
-                    </button>
                 </div>
             </div>
-            
-            <div class="result-grid">
+
+            <!-- Student Summary -->
+            <div class="marksheet-student-info">
+                <div class="student-detail">
+                    <span class="label">Name</span>
+                    <span class="value">${student.name}</span>
+                </div>
+                <div class="student-detail">
+                    <span class="label">Enrollment</span>
+                    <span class="value">${student.id}</span>
+                </div>
+                <div class="student-detail">
+                    <span class="label">Rank</span>
+                    <span class="value rank-badge ${rankClass}">
+                        <i class="fas fa-trophy"></i> #${student.combined.rank}
+                    </span>
+                </div>
+            </div>
+
+            <!-- Academic Records -->
+            <div class="marksheet-academic">
                 <!-- Semester 1 -->
-                <div class="result-semester">
-                    <h4><i class="fas fa-book-open"></i> Semester 1 (Nov 2025)</h4>
-                    ${Object.entries(student.semester1.subjects).map(([key, value]) => `
-                        <div class="subject-row">
-                            <span class="subject-name">${key.replace('NET_', 'NET ')}</span>
-                            <span class="subject-marks">${value}</span>
-                        </div>
-                    `).join('')}
-                    <div class="semester-total">
-                        <span>Total</span>
-                        <span>${student.semester1.total} (${student.semester1.percentage}%)</span>
+                <div class="marksheet-semester">
+                    <div class="semester-header">
+                        <h4>Term - I</h4>
+                        <span class="semester-status">Status: Regular</span>
                     </div>
+                    <table class="marksheet-table">
+                        <thead>
+                            <tr>
+                                <th>Paper Code</th>
+                                <th>Paper Name</th>
+                                <th>Obj Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${Object.entries(student.semester1.subjects).map(([key, value]) => `
+                                <tr>
+                                    <td>${key}</td>
+                                    <td>${getSubjectName(key)}</td>
+                                    <td><strong>${value}</strong></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"><strong>Total Marks</strong></td>
+                                <td><strong>${student.semester1.total}</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Result</strong></td>
+                                <td><span class="status-pass">${student.semester1.result}</span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
                 </div>
-                
+
                 <!-- Semester 2 -->
-                <div class="result-semester">
-                    <h4><i class="fas fa-book-open"></i> Semester 2 (June 2026)</h4>
-                    ${Object.entries(student.semester2.subjects).map(([key, value]) => `
-                        <div class="subject-row">
-                            <span class="subject-name">${key.replace('NET_', 'NET ')}</span>
-                            <span class="subject-marks">${value}</span>
-                        </div>
-                    `).join('')}
-                    <div class="semester-total">
-                        <span>Total</span>
-                        <span>${student.semester2.total} (${student.semester2.percentage}%)</span>
+                <div class="marksheet-semester">
+                    <div class="semester-header">
+                        <h4>Term - II</h4>
+                        <span class="semester-status">Status: Regular</span>
+                    </div>
+                    <table class="marksheet-table">
+                        <thead>
+                            <tr>
+                                <th>Paper Code</th>
+                                <th>Paper Name</th>
+                                <th>Obj Marks</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${Object.entries(student.semester2.subjects).map(([key, value]) => `
+                                <tr>
+                                    <td>${key}</td>
+                                    <td>${getSubjectName(key)}</td>
+                                    <td><strong>${value}</strong></td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="2"><strong>Total Marks</strong></td>
+                                <td><strong>${student.semester2.total}</strong></td>
+                            </tr>
+                            <tr>
+                                <td colspan="2"><strong>Result</strong></td>
+                                <td><span class="status-pass">${student.semester2.result}</span></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Grand Total -->
+            <div class="marksheet-grand-total">
+                <div class="grand-total-left">
+                    <span class="grand-label"><i class="fas fa-star"></i> Grand Total Marks</span>
+                    <span class="grand-value">${student.combined.total}</span>
+                </div>
+                <div class="grand-total-right">
+                    <span class="grand-label">Percentage</span>
+                    <span class="grand-percentage">${student.combined.percentage}%</span>
+                </div>
+            </div>
+
+            <!-- Footer with QR Code -->
+            <div class="marksheet-footer">
+                <div class="footer-left">
+                    <div class="sign-line">
+                        <span>Controller of Examinations</span>
+                        <span>SSR-GSP, Bhopal</span>
                     </div>
                 </div>
-                
-                <!-- Combined Result -->
-                <div class="result-combined">
-                    <span class="total-label"><i class="fas fa-star"></i> Combined Grand Total</span>
-                    <span class="total-value">${student.combined.total} | ${student.combined.percentage}%</span>
+                <div class="footer-right">
+                    <div class="footer-date">
+                        <span>Generated on: ${new Date().toLocaleDateString('en-IN', { day: '2-digit', month: 'short', year: 'numeric' })}</span>
+                    </div>
+                    <!-- QR CODE - Footer Right Corner -->
+                    <div class="footer-qr">
+                        <div id="qrCodeContainer"></div>
+                        <span class="qr-label">Scan to view marksheet</span>
+                    </div>
                 </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="marksheet-actions">
+                <button onclick="printResult()" class="action-btn print-btn" title="Print Marksheet">
+                    <i class="fas fa-print"></i> Print
+                </button>
+                <button onclick="downloadPDF()" class="action-btn pdf-btn" title="Download PDF">
+                    <i class="fas fa-file-pdf"></i> PDF
+                </button>
+                <button onclick="shareResult()" class="action-btn share-btn" title="Share Marksheet">
+                    <i class="fas fa-share-alt"></i> Share
+                </button>
             </div>
         </div>
     `;
 }
+
+// ============================================================
+// QR CODE GENERATOR
+// ============================================================
+function generateQRCode(studentId) {
+    const container = document.getElementById('qrCodeContainer');
+    if (!container) return;
+    
+    // Clear previous QR
+    container.innerHTML = '';
+    
+    // Build URL with student ID
+    const baseUrl = window.location.href.split('?')[0].split('#')[0];
+    const qrUrl = baseUrl + '?id=' + encodeURIComponent(studentId);
+    
+    // Generate QR Code
+    try {
+        new QRCode(container, {
+            text: qrUrl,
+            width: 80,
+            height: 80,
+            colorDark: "#1a1a2e",
+            colorLight: "#ffffff",
+            correctLevel: QRCode.CorrectLevel.H  // High error correction
+        });
+    } catch (e) {
+        // Fallback if QRCode library not loaded
+        container.innerHTML = `<span style="font-size: 0.6rem; color: #999;">QR</span>`;
+    }
+}
+
+// ============================================================
+// AUTO-LOAD MARKSHEET FROM URL PARAMETER
+// ============================================================
+function loadFromURL() {
+    const params = new URLSearchParams(window.location.search);
+    const studentId = params.get('id');
+    
+    if (studentId) {
+        const student = studentData.find(s => 
+            s.id === studentId || 
+            s.id.includes(studentId) ||
+            studentId.includes(s.id)
+        );
+        
+        if (student) {
+            // Show result
+            displayResult(student);
+            
+            // Update search input
+            const searchInput = document.getElementById('resultSearchInput');
+            if (searchInput) {
+                searchInput.value = student.id;
+            }
+            
+            // Scroll to results
+            setTimeout(function() {
+                document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+            }, 500);
+            
+            return true;
+        }
+    }
+    return false;
+}
+
+// ============================================================
+// SUBJECT NAME HELPER
+// ============================================================
+function getSubjectName(code) {
+    const names = {
+        'NET_M1': 'IT Essentials & PC Support',
+        'NET_M2': 'Network Essentials',
+        'NET_M3': 'Internetworking Technology',
+        'NET_M4': 'Server Essentials',
+        'NET_M5': 'Internet Applications',
+        'NET_M6': 'Software Applications',
+        'NET_M7': 'Infocomm Project',
+        'NET_M8': 'Virtualization Technology',
+        'PPD1': 'Personal and Professional Development-1',
+        'PPD2': 'Personal & Professional Development-2',
+        'PPD3': 'Speaking with Confidence'
+    };
+    return names[code] || code;
+}
+
 // ============================================================
 // TOPPERS SECTION
 // ============================================================
@@ -1285,12 +1465,16 @@ document.addEventListener('keydown', (e) => {
 // INITIALIZE
 // ============================================================
 function init() {
-    displayToppers();
-    updateStatistics();
+    // Check if student ID in URL
+    const loaded = loadFromURL();
+    
+    if (!loaded) {
+        displayToppers();
+        updateStatistics();
+    }
 }
 
 document.addEventListener('DOMContentLoaded', init);
-
 // ============================================================
 // CONSOLE HELP
 // ============================================================
@@ -1558,7 +1742,6 @@ function updateClock() {
         const time = now.toLocaleTimeString('en-IN', {
             hour: '2-digit',
             minute: '2-digit',
-            second: '2-digit',
             hour12: true
         });
         clock.textContent = '🕐 ' + time;
@@ -1569,10 +1752,20 @@ setInterval(updateClock, 1000);
 updateClock();
 
 // ============================================================
-// FEATURE 4: PRINT RESULT
+// FEATURE: PRINT RESULT - FIXED
 // ============================================================
 function printResult() {
-    window.print();
+    // Check if marksheet exists
+    const marksheet = document.querySelector('.marksheet-card');
+    if (!marksheet) {
+        alert('⚠️ Please search for a student first to print marksheet!');
+        return;
+    }
+    
+    // Small delay to ensure everything is rendered
+    setTimeout(function() {
+        window.print();
+    }, 300);
 }
 
 // ============================================================

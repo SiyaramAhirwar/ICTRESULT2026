@@ -1106,7 +1106,7 @@ function displayMultipleResults(results) {
 }
 
 // ============================================================
-// RESULT CARD GENERATOR
+// RESULT CARD GENERATOR - WITH PRINT, PDF, SHARE BUTTONS
 // ============================================================
 function displayResult(student) {
     resultContainer.innerHTML = createResultCard(student);
@@ -1123,7 +1123,7 @@ function createResultCard(student) {
                     <h3>${student.name}</h3>
                     <div class="enrollment"><i class="fas fa-id-card"></i> ${student.id}</div>
                 </div>
-                <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <div style="display: flex; gap: 12px; flex-wrap: wrap; align-items: center;">
                     <span class="result-rank-badge ${rankClass}">
                         <i class="fas fa-trophy"></i> Rank #${student.combined.rank}
                     </span>
@@ -1131,6 +1131,16 @@ function createResultCard(student) {
                         <i class="fas ${student.combined.finalStatus.includes('PASS') ? 'fa-check' : 'fa-times'}"></i>
                         ${student.combined.finalStatus}
                     </span>
+                    <!-- ===== PRINT, PDF, SHARE BUTTONS ===== -->
+                    <button onclick="printResult()" class="action-btn print-btn" title="Print Result">
+                        <i class="fas fa-print"></i>
+                    </button>
+                    <button onclick="downloadPDF()" class="action-btn pdf-btn" title="Download PDF">
+                        <i class="fas fa-file-pdf"></i>
+                    </button>
+                    <button onclick="shareResult()" class="action-btn share-btn" title="Share Result">
+                        <i class="fas fa-share-alt"></i>
+                    </button>
                 </div>
             </div>
             
@@ -1174,7 +1184,6 @@ function createResultCard(student) {
         </div>
     `;
 }
-
 // ============================================================
 // TOPPERS SECTION
 // ============================================================
@@ -1520,3 +1529,196 @@ document.addEventListener('keydown', (e) => {
 console.log('%c📷 QR Scanner Ready!', 'font-size: 16px; font-weight: bold; color: #4285f4;');
 console.log('%c📌 QR Code will redirect to the URL found in the QR', 'font-size: 12px; color: #888;');
 console.log('%c⌨️ Shortcut: Ctrl+Q to start/stop scanner', 'font-size: 12px; color: #888;');
+
+
+// ============================================================
+// FEATURE 2: BACK TO TOP BUTTON
+// ============================================================
+const backToTopBtn = document.getElementById('backToTop');
+
+window.addEventListener('scroll', function() {
+    if (window.scrollY > 300) {
+        backToTopBtn.classList.add('visible');
+    } else {
+        backToTopBtn.classList.remove('visible');
+    }
+});
+
+backToTopBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+});
+
+// ============================================================
+// FEATURE 3: LIVE CLOCK
+// ============================================================
+function updateClock() {
+    const clock = document.getElementById('liveClock');
+    if (clock) {
+        const now = new Date();
+        const time = now.toLocaleTimeString('en-IN', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        });
+        clock.textContent = '🕐 ' + time;
+    }
+}
+
+setInterval(updateClock, 1000);
+updateClock();
+
+// ============================================================
+// FEATURE 4: PRINT RESULT
+// ============================================================
+function printResult() {
+    window.print();
+}
+
+// ============================================================
+// FEATURE 5: DOWNLOAD PDF (using window.print save as PDF)
+// ============================================================
+function downloadPDF() {
+    // This uses browser's print to PDF functionality
+    window.print();
+    // User can select "Save as PDF" in print dialog
+}
+
+// ============================================================
+// FEATURE 6: COUNT ANIMATION
+// ============================================================
+function animateCount(element, target, duration = 1500) {
+    if (!element) return;
+    
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+    
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            current = target;
+            clearInterval(timer);
+        }
+        element.textContent = Math.floor(current);
+    }, 16);
+}
+
+// ============================================================
+// FEATURE 10: SHARE RESULT - FIXED
+// ============================================================
+function shareResult() {
+    // Check if result is displayed
+    const studentName = document.querySelector('.result-student-info h3');
+    const enrollment = document.querySelector('.result-student-info .enrollment');
+    const percentage = document.querySelector('.result-combined .total-value');
+    
+    if (!studentName || !enrollment || !percentage) {
+        // Show friendly message
+        alert('⚠️ Please search for a student first to share their result!');
+        return;
+    }
+    
+    // Extract data
+    const name = studentName.textContent || 'Student';
+    const enrollText = enrollment.textContent.replace('📋 ', '').trim();
+    const percentText = percentage.textContent || 'N/A';
+    
+    const shareText = `🎓 SSR-GSP Result\n\n👤 Student: ${name}\n📋 Enrollment: ${enrollText}\n📊 Percentage: ${percentText}\n\n🔗 Check your result at SSR-GSP Result Portal`;
+    
+    // Try native share first (mobile)
+    if (navigator.share) {
+        navigator.share({
+            title: 'SSR-GSP Result',
+            text: shareText,
+            url: window.location.href
+        }).catch(function(err) {
+            // User cancelled or error
+            console.log('Share cancelled:', err);
+        });
+        return;
+    }
+    
+    // Fallback: Copy to clipboard
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareText).then(function() {
+            showToast('✅ Result copied to clipboard! Share it anywhere.');
+        }).catch(function() {
+            fallbackCopy(shareText);
+        });
+    } else {
+        fallbackCopy(shareText);
+    }
+}
+
+// ============================================================
+// FALLBACK COPY METHOD
+// ============================================================
+function fallbackCopy(text) {
+    // Create temporary input
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.left = '-9999px';
+    textarea.style.top = '-9999px';
+    document.body.appendChild(textarea);
+    
+    try {
+        textarea.select();
+        document.execCommand('copy');
+        showToast('✅ Result copied to clipboard! Share it anywhere.');
+    } catch (err) {
+        // Final fallback - show in prompt
+        prompt('Copy this text to share:', text);
+    }
+    
+    document.body.removeChild(textarea);
+}
+
+// ============================================================
+// TOAST NOTIFICATION - For Share/Other Messages
+// ============================================================
+function showToast(message) {
+    // Check if toast already exists
+    let toast = document.getElementById('toastNotification');
+    
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toastNotification';
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--bg-glass);
+            backdrop-filter: var(--glass-blur);
+            -webkit-backdrop-filter: var(--glass-blur);
+            padding: 14px 28px;
+            border-radius: 12px;
+            border: 1px solid var(--bg-glass-border);
+            box-shadow: var(--card-hover-shadow);
+            color: var(--text-primary);
+            font-size: 0.95rem;
+            z-index: 10000;
+            opacity: 0;
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateX(-50%) translateY(20px);
+            pointer-events: none;
+            max-width: 90%;
+            text-align: center;
+        `;
+        document.body.appendChild(toast);
+    }
+    
+    toast.textContent = message;
+    toast.style.opacity = '1';
+    toast.style.transform = 'translateX(-50%) translateY(0)';
+    toast.style.pointerEvents = 'none';
+    
+    // Hide after 3 seconds
+    clearTimeout(toast._timeout);
+    toast._timeout = setTimeout(function() {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(-50%) translateY(20px)';
+    }, 3000);
+}

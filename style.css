@@ -2064,3 +2064,229 @@ img {
 .fade-in:nth-child(4) { animation-delay: 0.2s; }
 .fade-in:nth-child(5) { animation-delay: 0.25s; }
 .fade-in:nth-child(6) { animation-delay: 0.3s; }
+
+
+/* ============================================================
+   PRINT STYLES
+   ============================================================ */
+@media print {
+    .navbar,
+    .hero,
+    .toppers-section,
+    .statistics-section,
+    .qr-scanner-section,
+    .about-section,
+    .footer,
+    .back-top-btn,
+    .action-btn {
+        display: none !important;
+    }
+    
+    .results-section {
+        padding: 20px !important;
+        background: white !important;
+    }
+    
+    .result-card {
+        box-shadow: none !important;
+        border: 1px solid #ddd !important;
+        background: white !important;
+    }
+    
+    .result-card-container {
+        min-height: auto !important;
+    }
+    
+    body {
+        background: white !important;
+        padding-top: 0 !important;
+        color: black !important;
+    }
+    
+    .result-semester {
+        background: #f5f5f5 !important;
+        border: 1px solid #ddd !important;
+    }
+    
+    .result-combined {
+        background: #e8f0fe !important;
+    }
+    
+    .section-header h2 {
+        -webkit-text-fill-color: #1a1a2e !important;
+        color: #1a1a2e !important;
+        background: none !important;
+    }
+}
+
+/* ============================================================
+   FEATURE 9: NO RESULT BETTER UI
+   ============================================================ */
+.result-placeholder {
+    text-align: center;
+    padding: 60px 20px;
+    background: var(--bg-glass);
+    backdrop-filter: var(--glass-blur);
+    -webkit-backdrop-filter: var(--glass-blur);
+    border-radius: var(--border-radius);
+    border: 2px dashed var(--border-color);
+}
+
+.result-placeholder i {
+    color: var(--accent-color);
+    opacity: 0.5;
+    margin-bottom: 16px;
+}
+
+.result-placeholder .empty-state-icon {
+    font-size: 4rem;
+    margin-bottom: 16px;
+    display: block;
+}
+
+.result-placeholder h3 {
+    color: var(--text-secondary);
+    margin-bottom: 8px;
+    font-size: 1.4rem;
+}
+
+.result-placeholder p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+.result-placeholder .empty-suggestions {
+    margin-top: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+}
+
+.result-placeholder .empty-suggestions span {
+    padding: 4px 14px;
+    background: var(--accent-light);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    color: var(--accent-color);
+}
+
+/* ============================================================
+   FEATURE 4,5,10: ACTION BUTTONS (Print, PDF, Share)
+   ============================================================ */
+.action-btn {
+    width: 38px;
+    height: 38px;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    color: white;
+}
+
+.action-btn:hover {
+    transform: scale(1.1);
+}
+
+.print-btn {
+    background: #4285f4;
+}
+
+.print-btn:hover {
+    box-shadow: 0 4px 16px rgba(66, 133, 244, 0.4);
+}
+
+.pdf-btn {
+    background: #ea4335;
+}
+
+.pdf-btn:hover {
+    box-shadow: 0 4px 16px rgba(234, 67, 53, 0.4);
+}
+
+.share-btn {
+    background: #34a853;
+}
+
+.share-btn:hover {
+    box-shadow: 0 4px 16px rgba(52, 168, 83, 0.4);
+}
+
+@media (max-width: 480px) {
+    .action-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 0.75rem;
+    }
+}
+
+/* ============================================================
+   FEATURE 2: BACK TO TOP BUTTON
+   ============================================================ */
+.back-top-btn {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 999;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+}
+
+.back-top-btn.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.back-top-btn:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 8px 30px rgba(108, 99, 255, 0.4);
+}
+
+@media (max-width: 480px) {
+    .back-top-btn {
+        width: 44px;
+        height: 44px;
+        font-size: 1rem;
+        bottom: 16px;
+        right: 16px;
+    }
+}
+
+/* ============================================================
+   FEATURE 3: LIVE CLOCK
+   ============================================================ */
+.live-clock {
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    font-variant-numeric: tabular-nums;
+    padding: 4px 12px;
+    background: var(--accent-light);
+    border-radius: 20px;
+    min-width: 80px;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .live-clock {
+        font-size: 0.7rem;
+        padding: 2px 10px;
+        min-width: 60px;
+    }
+}

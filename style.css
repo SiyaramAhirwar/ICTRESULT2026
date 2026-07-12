@@ -1,5 +1,5 @@
 /* ============================================================
-   COMPLETE CSS - SSR-GSP Result Portal
+   COMPLETE CSS - SSR-GSP Result Portal (GSP 2026 Certificate Style)
    ============================================================ */
 
 /* ============================================================
@@ -37,6 +37,11 @@
     --border-radius: 20px;
     --glass-blur: blur(16px);
     --nav-height: 80px;
+    
+    /* GSP Certificate Colors */
+    --gsp-red: #CC0000;
+    --gsp-blue: #1a3a6b;
+    --gsp-light-bg: #f8f4f0;
 }
 
 [data-theme="dark"] {
@@ -55,6 +60,9 @@
     --card-shadow: 0 8px 32px rgba(0, 0, 0, 0.6);
     --card-hover-shadow: 0 12px 48px rgba(108, 99, 255, 0.2);
     --border-color: rgba(139, 131, 255, 0.12);
+    --gsp-red: #ff4444;
+    --gsp-blue: #8b83ff;
+    --gsp-light-bg: #1a1a2e;
 }
 
 html {
@@ -694,134 +702,209 @@ img {
 }
 
 /* ============================================================
-   MARKSHEET CARD - Screen + Print
+   MARKSHEET CARD - GSP 2026 CERTIFICATE STYLE
    ============================================================ */
+
+/* --- Screen Style --- */
 .marksheet-card {
     max-width: 900px;
     margin: 0 auto;
-    background: var(--bg-secondary);
-    border-radius: 16px;
-    padding: 24px 28px;
+    background: #ffffff;
+    border-radius: 0;
+    padding: 30px 35px 25px 35px;
     box-shadow: var(--card-shadow);
-    border: 2px solid var(--border-color);
+    border: 4px solid #CC0000 !important;
     position: relative;
     overflow: visible;
 }
 
-/* Screen Shadows */
+[data-theme="dark"] .marksheet-card {
+    background: var(--bg-secondary);
+    border-color: #ff4444 !important;
+}
+
+/* Screen Shadows - Hide */
 .marksheet-card .print-shadow-blue,
 .marksheet-card .print-shadow-orange {
     display: none;
 }
 
-/* Watermark - Screen */
+/* Screen Watermark - Show */
 .marksheet-card .print-watermark-logo {
-    display: none;
+    display: block !important;
+    position: absolute !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    width: 200px !important;
+    height: 200px !important;
+    background-image: url('../images/gsp-logo.png') !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+    background-position: center !important;
+    opacity: 0.04 !important;
+    pointer-events: none !important;
+    z-index: 0 !important;
+}
+
+[data-theme="dark"] .marksheet-card .print-watermark-logo {
+    opacity: 0.08 !important;
 }
 
 /* Header - Screen */
 .marksheet-header {
     text-align: center;
-    padding-bottom: 8px;
-    border-bottom: 2px solid var(--border-color);
-    margin-bottom: 10px;
+    padding-bottom: 4px;
+    border-bottom: 2px solid #CC0000;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="dark"] .marksheet-header {
+    border-bottom-color: #ff4444;
 }
 
 .marksheet-institute h2 {
-    font-size: 1.3rem;
+    font-size: 1.8rem;
     font-weight: 900;
-    color: #8B0000; /* Dark Red */
+    color: #CC0000;
     text-align: center;
-    letter-spacing: 0.5px;
+    letter-spacing: 2px;
     margin: 0;
     text-transform: uppercase;
+    font-family: 'Inter', Arial, sans-serif;
 }
 
-.marksheet-institute p {
-    color: var(--text-muted);
-    font-size: 0.75rem;
+[data-theme="dark"] .marksheet-institute h2 {
+    color: #ff4444;
+}
+
+.marksheet-institute .sub-title {
+    color: #1a3a6b;
+    font-size: 0.85rem;
     text-align: center;
-    margin: 0;
+    margin: 2px 0 0 0;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+[data-theme="dark"] .marksheet-institute .sub-title {
+    color: #8b83ff;
+}
+
+.marksheet-institute .ssrgsp-name {
+    margin-top: 4px;
+    font-size: 0.8rem;
+    color: #1a3a6b;
+    font-weight: 600;
+}
+
+[data-theme="dark"] .marksheet-institute .ssrgsp-name {
+    color: #b0b0d0;
+}
+
+.marksheet-institute .ssrgsp-location {
+    font-size: 0.7rem;
+    color: #666;
     font-weight: 500;
 }
 
-.marksheet-title {
+[data-theme="dark"] .marksheet-institute .ssrgsp-location {
+    color: #8888aa;
+}
+
+/* Student Summary - Screen */
+.marksheet-student-summary {
+    background: #f8f4f0;
+    border: 1.5px solid #CC0000;
+    padding: 8px 20px;
+    margin: 8px 0 10px 0;
+    border-radius: 4px;
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="dark"] .marksheet-student-summary {
+    background: #1a1a2e;
+    border-color: #ff4444;
+}
+
+.marksheet-student-summary .summary-title {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: #1a3a6b;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+}
+
+[data-theme="dark"] .marksheet-student-summary .summary-title {
+    color: #8b83ff;
+}
+
+.marksheet-student-summary .summary-row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 4px;
-    padding: 0 4px;
-}
-
-.marksheet-title h3 {
-    font-size: 0.85rem;
-    color: var(--text-secondary);
-    font-weight: 700;
-    margin: 0;
-}
-
-.marksheet-status {
-    padding: 2px 14px;
-    border-radius: 12px;
-    font-size: 0.75rem;
-    font-weight: 700;
-}
-
-.marksheet-status.status-pass {
-    color: var(--success-color);
-    background: rgba(52, 168, 83, 0.12);
-    border: 1.5px solid var(--success-color);
-}
-
-.marksheet-status.status-fail {
-    color: var(--danger-color);
-    background: rgba(234, 67, 53, 0.12);
-    border: 1.5px solid var(--danger-color);
-}
-
-.marksheet-status i {
-    margin-right: 4px;
-}
-
-/* Student Info - Screen */
-.marksheet-student-info {
-    background: var(--bg-glass);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--bg-glass-border);
-    padding: 6px 14px;
-    margin: 6px 0 8px 0;
-    border-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 30px;
     flex-wrap: wrap;
 }
 
-.student-detail {
+.marksheet-student-summary .summary-item {
     display: flex;
     align-items: center;
     gap: 4px;
 }
 
-.student-detail .label {
-    color: var(--text-muted);
-    font-size: 0.6rem;
-    text-transform: uppercase;
+.marksheet-student-summary .summary-item .label {
+    color: #1a3a6b;
+    font-size: 0.7rem;
     font-weight: 700;
+    text-transform: uppercase;
     opacity: 0.7;
 }
 
-.student-detail .value {
-    color: var(--text-primary);
-    font-size: 0.85rem;
-    font-weight: 600;
+[data-theme="dark"] .marksheet-student-summary .summary-item .label {
+    color: #b0b0d0;
 }
 
-.student-detail .value.rank-badge {
-    font-size: 0.75rem;
-    padding: 1px 10px;
-    border-radius: 10px;
+.marksheet-student-summary .summary-item .value {
+    color: #0a1628;
+    font-size: 0.9rem;
+    font-weight: 700;
+}
+
+[data-theme="dark"] .marksheet-student-summary .summary-item .value {
+    color: #f0f0ff;
+}
+
+/* Course Details - Screen */
+.marksheet-course-details {
+    margin: 6px 0 10px 0;
+    padding: 0 4px;
+    position: relative;
+    z-index: 1;
+}
+
+.marksheet-course-details .course-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: #1a3a6b;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+[data-theme="dark"] .marksheet-course-details .course-label {
+    color: #8b83ff;
+}
+
+.marksheet-course-details .course-value {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #0a1628;
+}
+
+[data-theme="dark"] .marksheet-course-details .course-value {
+    color: #f0f0ff;
 }
 
 /* Academic Records - Screen */
@@ -829,16 +912,21 @@ img {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
 }
 
 .marksheet-semester {
-    background: var(--bg-glass);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--bg-glass-border);
+    background: #fafafa;
+    border: 1.5px solid #1a3a6b;
     padding: 8px 10px;
-    border-radius: 8px;
+    border-radius: 4px;
+}
+
+[data-theme="dark"] .marksheet-semester {
+    background: #1a1a2e;
+    border-color: #8b83ff;
 }
 
 .semester-header {
@@ -846,79 +934,123 @@ img {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 4px;
-    padding-bottom: 4px;
-    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 3px;
+    border-bottom: 2px solid #CC0000;
+}
+
+[data-theme="dark"] .semester-header {
+    border-bottom-color: #ff4444;
 }
 
 .semester-header h4 {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: var(--accent-color);
+    font-size: 0.85rem;
+    font-weight: 900;
+    color: #CC0000;
     margin: 0;
+}
+
+[data-theme="dark"] .semester-header h4 {
+    color: #ff4444;
 }
 
 .semester-status {
     font-size: 0.6rem;
-    color: var(--text-muted);
-    background: var(--accent-light);
-    padding: 0 10px;
+    color: #1a3a6b;
+    background: #e8f0fe;
+    padding: 0 12px;
     border-radius: 10px;
-    font-weight: 600;
+    font-weight: 700;
 }
 
+[data-theme="dark"] .semester-status {
+    color: #b0b0d0;
+    background: #2a2a4e;
+}
+
+/* Table - Screen */
 .marksheet-table {
     width: 100%;
     border-collapse: collapse;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
 }
 
 .marksheet-table thead th {
     text-align: left;
-    color: var(--text-muted);
-    border-bottom: 1.5px solid var(--border-color);
-    padding: 2px 4px;
+    color: #1a3a6b;
+    border-bottom: 1.5px solid #1a3a6b;
+    padding: 3px 4px;
     font-size: 0.6rem;
     text-transform: uppercase;
-    font-weight: 700;
+    font-weight: 800;
     letter-spacing: 0.3px;
 }
 
+[data-theme="dark"] .marksheet-table thead th {
+    color: #8b83ff;
+    border-bottom-color: #8b83ff;
+}
+
 .marksheet-table tbody td {
-    color: var(--text-secondary);
-    border-bottom: 1px solid var(--border-color);
+    color: #0a1628;
+    border-bottom: 1px solid #e0e0e0;
     padding: 2px 4px;
     font-weight: 500;
-    font-size: 0.7rem;
+    font-size: 0.65rem;
+}
+
+[data-theme="dark"] .marksheet-table tbody td {
+    color: #f0f0ff;
+    border-bottom-color: #2a2a4e;
 }
 
 .marksheet-table tbody td strong {
-    color: var(--text-primary);
+    color: #1a3a6b;
     font-weight: 700;
 }
 
+[data-theme="dark"] .marksheet-table tbody td strong {
+    color: #8b83ff;
+}
+
 .marksheet-table tfoot td {
-    border-top: 1.5px solid var(--border-color);
-    color: var(--text-primary);
-    padding: 2px 4px;
+    border-top: 1.5px solid #1a3a6b;
+    color: #0a1628;
+    padding: 3px 4px;
     font-weight: 700;
     font-size: 0.7rem;
 }
 
+[data-theme="dark"] .marksheet-table tfoot td {
+    border-top-color: #8b83ff;
+    color: #f0f0ff;
+}
+
 .marksheet-table tfoot .status-pass {
-    color: var(--success-color);
+    color: #2e7d32;
     font-weight: 700;
+}
+
+[data-theme="dark"] .marksheet-table tfoot .status-pass {
+    color: #4caf50;
 }
 
 /* Grand Total - Screen */
 .marksheet-grand-total {
-    background: linear-gradient(135deg, var(--accent-light), transparent);
-    border: 2px solid var(--border-color);
-    padding: 6px 16px;
-    margin: 6px 0 8px 0;
-    border-radius: 8px;
+    background: #f0f4f8;
+    border: 2px solid #CC0000;
+    padding: 6px 20px;
+    margin: 6px 0 10px 0;
+    border-radius: 4px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="dark"] .marksheet-grand-total {
+    background: #1a1a2e;
+    border-color: #ff4444;
 }
 
 .grand-total-left,
@@ -929,29 +1061,41 @@ img {
 }
 
 .grand-label {
-    font-weight: 600;
-    color: var(--text-secondary);
-    font-size: 0.75rem;
+    font-weight: 700;
+    color: #1a3a6b;
+    font-size: 0.8rem;
+}
+
+[data-theme="dark"] .grand-label {
+    color: #8b83ff;
 }
 
 .grand-value {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     font-weight: 900;
-    color: var(--accent-color);
+    color: #CC0000;
+}
+
+[data-theme="dark"] .grand-value {
+    color: #ff4444;
 }
 
 .grand-percentage {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     font-weight: 900;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #CC0000;
+    background: none !important;
+    -webkit-text-fill-color: #CC0000 !important;
+}
+
+[data-theme="dark"] .grand-percentage {
+    color: #ff4444 !important;
+    -webkit-text-fill-color: #ff4444 !important;
 }
 
 /* Footer - Screen */
 .marksheet-footer {
-    border-top: 2px solid var(--border-color);
+    border-top: 2px solid #CC0000;
     padding-top: 8px;
     margin-bottom: 0;
     display: flex;
@@ -959,6 +1103,12 @@ img {
     align-items: center;
     flex-wrap: wrap;
     gap: 8px;
+    position: relative;
+    z-index: 1;
+}
+
+[data-theme="dark"] .marksheet-footer {
+    border-top-color: #ff4444;
 }
 
 .footer-left {
@@ -978,102 +1128,67 @@ img {
 }
 
 .sign-line span {
-    color: var(--text-muted);
+    color: #0a1628;
     font-size: 0.65rem;
     font-weight: 500;
     display: block;
     line-height: 1.3;
 }
 
+[data-theme="dark"] .sign-line span {
+    color: #b0b0d0;
+}
+
 .footer-date {
-    color: var(--text-muted);
+    color: #0a1628;
     font-size: 0.65rem;
     font-weight: 500;
+}
+
+[data-theme="dark"] .footer-date {
+    color: #b0b0d0;
 }
 
 /* QR Code - Screen */
 .footer-qr {
     display: flex;
-    flex-direction: column;
+    flex-direction: row !important;
     align-items: center;
-    gap: 2px;
+    gap: 10px !important;
 }
 
 .footer-qr #qrCodeContainer {
-    border: 1px solid var(--border-color);
-    padding: 3px;
+    border: 1.5px solid #1a3a6b;
+    padding: 4px;
     background: white;
     border-radius: 4px;
-    width: 60px;
-    height: 60px;
+    width: 70px;
+    height: 70px;
+    flex-shrink: 0;
+}
+
+[data-theme="dark"] .footer-qr #qrCodeContainer {
+    border-color: #8b83ff;
+    background: #1a1a2e;
 }
 
 .footer-qr #qrCodeContainer img,
 .footer-qr #qrCodeContainer canvas {
-    width: 54px !important;
-    height: 54px !important;
+    width: 62px !important;
+    height: 62px !important;
 }
 
 .footer-qr .qr-label {
-    font-size: 0.5rem;
-    color: var(--text-muted);
-    font-weight: 600;
-    letter-spacing: 0.3px;
+    color: #1a3a6b;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 
-/* Action Buttons */
-.marksheet-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-    flex-wrap: wrap;
-    padding-top: 12px;
-    border-top: 1px solid var(--border-color);
-    margin-top: 8px;
-}
-
-.marksheet-actions .action-btn {
-    padding: 6px 16px;
-    border: none;
-    border-radius: 8px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: var(--transition);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: white;
-    font-family: inherit;
-}
-
-.marksheet-actions .action-btn:hover {
-    transform: translateY(-2px);
-}
-
-.marksheet-actions .print-btn {
-    background: #4285f4;
-}
-
-.marksheet-actions .print-btn:hover {
-    box-shadow: 0 4px 16px rgba(66, 133, 244, 0.4);
-}
-
-.marksheet-actions .pdf-btn {
-    background: #ea4335;
-}
-
-.marksheet-actions .pdf-btn:hover {
-    box-shadow: 0 4px 16px rgba(234, 67, 53, 0.4);
-}
-
-.marksheet-actions .share-btn {
-    background: #34a853;
-}
-
-.marksheet-actions .share-btn:hover {
-    box-shadow: 0 4px 16px rgba(52, 168, 83, 0.4);
+[data-theme="dark"] .footer-qr .qr-label {
+    color: #8b83ff;
 }
 
 /* Rank Badges */
@@ -1814,17 +1929,25 @@ img {
     }
     
     .marksheet-card {
-        padding: 14px 16px;
+        padding: 18px 18px !important;
     }
     
     .marksheet-institute h2 {
-        font-size: 1rem;
+        font-size: 1.2rem !important;
+        letter-spacing: 1px !important;
     }
     
-    .marksheet-student-info {
-        flex-wrap: wrap;
-        gap: 4px;
-        padding: 6px 10px;
+    .marksheet-institute .sub-title {
+        font-size: 0.7rem !important;
+    }
+    
+    .marksheet-student-summary {
+        padding: 6px 14px !important;
+    }
+    
+    .marksheet-student-summary .summary-row {
+        flex-direction: column !important;
+        gap: 2px !important;
     }
     
     .student-detail {
@@ -1926,12 +2049,11 @@ img {
     }
     
     .marksheet-card {
-        padding: 10px 12px;
-        border-radius: 10px;
+        padding: 12px 14px !important;
     }
     
     .marksheet-institute h2 {
-        font-size: 0.85rem;
+        font-size: 1rem !important;
     }
     
     .marksheet-table {
@@ -2068,13 +2190,11 @@ img {
 .fade-in:nth-child(5) { animation-delay: 0.25s; }
 .fade-in:nth-child(6) { animation-delay: 0.3s; }
 
-
-
 /* ============================================================
-   PRINT STYLES - CERTIFICATE STYLE (SINGLE PAGE)
+   PRINT STYLES - EXACT GSP 2026 CERTIFICATE
    ============================================================ */
 @media print {
-    /* === HIDE EVERYTHING EXCEPT MARKSHEET === */
+    /* --- Hide Everything Except Marksheet --- */
     .navbar,
     .hero,
     .hero-bg-animation,
@@ -2110,7 +2230,7 @@ img {
         display: none !important;
     }
 
-    /* === FORCE PRINT BACKGROUND COLORS & IMAGES === */
+    /* --- Force Print Background Colors --- */
     * {
         -webkit-print-color-adjust: exact !important;
         print-color-adjust: exact !important;
@@ -2125,11 +2245,9 @@ img {
         width: 100% !important;
         overflow: hidden !important;
         color: #0a1628 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 
-    /* === MARKSHEET CONTAINER - FULL PAGE === */
+    /* --- Container Full Page --- */
     .results-section {
         display: block !important;
         padding: 0 !important;
@@ -2141,8 +2259,6 @@ img {
         border-radius: 0 !important;
         position: relative !important;
         overflow: hidden !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 
     .result-card-container {
@@ -2154,7 +2270,7 @@ img {
         overflow: hidden !important;
     }
 
-    /* === MARKSHEET CARD - FULL PAGE WITH BORDER === */
+    /* --- Marksheet Card - Full Page Red Border --- */
     .result-card,
     .marksheet-card {
         display: block !important;
@@ -2163,9 +2279,9 @@ img {
         height: 100% !important;
         min-height: 100vh !important;
         margin: 0 !important;
-        padding: 20px 28px !important;
+        padding: 25px 30px !important;
         background: white !important;
-        border: 4px solid #0a1628 !important;
+        border: 5px solid #CC0000 !important;
         box-shadow: none !important;
         border-radius: 0 !important;
         opacity: 1 !important;
@@ -2175,203 +2291,157 @@ img {
         position: relative !important;
         overflow: hidden !important;
         box-sizing: border-box !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 
-    /* === PRINT-ONLY ELEMENTS === */
+    /* --- Watermark Logo --- */
     .print-watermark-logo {
         display: block !important;
         position: absolute !important;
         top: 50% !important;
         left: 50% !important;
         transform: translate(-50%, -50%) !important;
-        width: 280px !important;
-        height: 280px !important;
-        background-image: url('../images/gsp-logo.png') !important;
+        width: 300px !important;
+        height: 300px !important;
+        background-image: url('images\gsp-logo.png') !important;
         background-size: contain !important;
         background-repeat: no-repeat !important;
         background-position: center !important;
-        opacity: 0.06 !important;
+        opacity: 0.05 !important;
         pointer-events: none !important;
         z-index: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 
-    /* === SHADOWS - FIXED WITH SVG TECHNIQUE === */
-    .print-shadow-blue {
-        display: block !important;
-        position: absolute !important;
-        top: -60px !important;
-        right: -60px !important;
-        left: auto !important;
-        bottom: auto !important;
-        width: 280px !important;
-        height: 280px !important;
-        pointer-events: none !important;
-        z-index: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        /* Fallback using SVG data URI */
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='b' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' style='stop-color:%234285f4;stop-opacity:0.30'/%3E%3Cstop offset='100%25' style='stop-color:%234285f4;stop-opacity:0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50%25' cy='50%25' r='50%25' fill='url(%23b)'/%3E%3C/svg%3E") !important;
-        background-size: 100% 100% !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        border-radius: 50% !important;
-    }
-
-    .print-shadow-orange {
-        display: block !important;
-        position: absolute !important;
-        bottom: -60px !important;
-        left: -60px !important;
-        top: auto !important;
-        right: auto !important;
-        width: 280px !important;
-        height: 280px !important;
-        pointer-events: none !important;
-        z-index: 0 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        /* Fallback using SVG data URI */
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='o' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' style='stop-color:%23ff8c00;stop-opacity:0.35'/%3E%3Cstop offset='100%25' style='stop-color:%23ff8c00;stop-opacity:0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50%25' cy='50%25' r='50%25' fill='url(%23o)'/%3E%3C/svg%3E") !important;
-        background-size: 100% 100% !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        border-radius: 50% !important;
-    }
-
-    /* === CONTENT Z-INDEX === */
-    .marksheet-header,
-    .marksheet-student-info,
-    .marksheet-academic,
-    .marksheet-semester,
-    .marksheet-grand-total,
-    .marksheet-footer {
+    /* --- Headers --- */
+    .marksheet-header {
+        text-align: center !important;
+        padding-bottom: 6px !important;
+        border-bottom: 3px solid #CC0000 !important;
+        margin-bottom: 10px !important;
         position: relative !important;
         z-index: 1 !important;
     }
 
-    /* === HEADER === */
-    .marksheet-header {
-        padding-bottom: 8px !important;
-        border-bottom: 2px solid #0a1628 !important;
-        margin-bottom: 8px !important;
-    }
-
     .marksheet-institute h2 {
-        font-size: 1.6rem !important;
-        color: #8B0000 !important;
+        font-size: 2.2rem !important;
+        color: #CC0000 !important;
         font-weight: 900 !important;
         text-align: center !important;
-        letter-spacing: 0.5px !important;
+        letter-spacing: 3px !important;
         margin: 0 !important;
         text-transform: uppercase !important;
         font-family: 'Inter', Arial, sans-serif !important;
     }
 
-    .marksheet-institute p {
-        color: #0a1628 !important;
-        font-size: 0.7rem !important;
+    .marksheet-institute1 h2 {
+        font-size: 2.2rem !important;
+        color: #3003ad !important;
+        font-weight: 900 !important;
+        text-align: center !important;
+        letter-spacing: 3px !important;
+        margin: 0 !important;
+        text-transform: uppercase !important;
+        font-family: 'Inter', Arial, sans-serif !important;
+    }
+
+    .marksheet-institute .sub-title {
+        color: #1a3a6b !important;
+        font-size: 0.9rem !important;
         text-align: center !important;
         margin: 2px 0 0 0 !important;
+        font-weight: 600 !important;
+        letter-spacing: 1px !important;
+    }
+
+    .marksheet-institute .ssrgsp-name {
+        margin-top: 4px !important;
+        font-size: 0.85rem !important;
+        color: #1a3a6b !important;
+        font-weight: 600 !important;
+    }
+
+    .marksheet-institute .ssrgsp-location {
+        font-size: 0.75rem !important;
+        color: #666 !important;
         font-weight: 500 !important;
     }
 
-    .marksheet-title {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        margin-top: 4px !important;
-        padding: 0 2px !important;
-    }
-
-    .marksheet-title h3 {
-        font-size: 0.85rem !important;
-        color: #0a1628 !important;
-        font-weight: 700 !important;
-        margin: 0 !important;
-    }
-
-    .marksheet-status {
-        color: #0a1628 !important;
-        background: #e8f5e9 !important;
-        border: 1px solid #2e7d32 !important;
-        padding: 1px 14px !important;
-        border-radius: 12px !important;
-        font-size: 0.7rem !important;
-        font-weight: 700 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .marksheet-status.status-fail {
-        background: #ffebee !important;
-        border-color: #c62828 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    /* === STUDENT INFO - 3 COLUMN === */
-    .marksheet-student-info {
-        background: #f5f5f5 !important;
-        border: 1.5px solid #0a1628 !important;
-        padding: 6px 16px !important;
-        margin: 6px 0 10px 0 !important;
+    /* --- Student Summary --- */
+    .marksheet-student-summary {
+        background: #f8f4f0 !important;
+        border: 2px solid #CC0000 !important;
+        padding: 8px 20px !important;
+        margin: 8px 0 10px 0 !important;
         border-radius: 4px !important;
-        display: grid !important;
-        grid-template-columns: 1fr 1fr 0.8fr !important;
-        gap: 10px !important;
-        align-items: center !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+        position: relative !important;
+        z-index: 1 !important;
     }
 
-    .student-detail {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 4px !important;
-    }
-
-    .student-detail .label {
-        color: #0a1628 !important;
-        font-size: 0.55rem !important;
-        text-transform: uppercase !important;
-        font-weight: 700 !important;
-        opacity: 0.6 !important;
-        min-width: fit-content !important;
-    }
-
-    .student-detail .value {
-        color: #0a1628 !important;
+    .marksheet-student-summary .summary-title {
         font-size: 0.85rem !important;
+        font-weight: 800 !important;
+        color: #1a3a6b !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+        margin-bottom: 2px !important;
+    }
+
+    .marksheet-student-summary .summary-row {
+        display: flex !important;
+        gap: 30px !important;
+        flex-wrap: wrap !important;
+    }
+
+    .marksheet-student-summary .summary-item .label {
+        color: #1a3a6b !important;
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        text-transform: uppercase !important;
+        opacity: 0.7 !important;
+    }
+
+    .marksheet-student-summary .summary-item .value {
+        color: #0a1628 !important;
+        font-size: 0.95rem !important;
         font-weight: 700 !important;
     }
 
-    .student-detail .value.rank-badge {
-        font-size: 0.75rem !important;
-        padding: 1px 12px !important;
-        border-radius: 10px !important;
+    /* --- Course Details --- */
+    .marksheet-course-details {
+        margin: 6px 0 10px 0 !important;
+        padding: 0 4px !important;
+        position: relative !important;
+        z-index: 1 !important;
     }
 
-    /* === ACADEMIC RECORDS === */
+    .marksheet-course-details .course-label {
+        font-size: 0.75rem !important;
+        font-weight: 700 !important;
+        color: #1a3a6b !important;
+        text-transform: uppercase !important;
+        letter-spacing: 0.5px !important;
+    }
+
+    .marksheet-course-details .course-value {
+        font-size: 0.95rem !important;
+        font-weight: 700 !important;
+        color: #0a1628 !important;
+    }
+
+    /* --- Academic Records --- */
     .marksheet-academic {
         display: grid !important;
         grid-template-columns: 1fr 1fr !important;
-        gap: 10px !important;
+        gap: 12px !important;
         margin-bottom: 8px !important;
+        position: relative !important;
+        z-index: 1 !important;
     }
 
     .marksheet-semester {
         background: #fafafa !important;
-        border: 1.5px solid #0a1628 !important;
-        padding: 6px 10px !important;
+        border: 2px solid #1a3a6b !important;
+        padding: 8px 12px !important;
         border-radius: 4px !important;
-        display: block !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 
     .semester-header {
@@ -2380,28 +2450,26 @@ img {
         align-items: center !important;
         margin-bottom: 4px !important;
         padding-bottom: 3px !important;
-        border-bottom: 1px solid #ddd !important;
+        border-bottom: 2px solid #CC0000 !important;
     }
 
     .semester-header h4 {
-        color: #0a1628 !important;
-        font-size: 0.7rem !important;
-        font-weight: 800 !important;
+        font-size: 0.9rem !important;
+        font-weight: 900 !important;
+        color: #CC0000 !important;
         margin: 0 !important;
     }
 
     .semester-status {
-        color: #0a1628 !important;
-        background: #e8e8e8 !important;
-        padding: 0 10px !important;
-        border-radius: 8px !important;
-        font-size: 0.55rem !important;
-        font-weight: 600 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
+        font-size: 0.65rem !important;
+        color: #1a3a6b !important;
+        background: #e8f0fe !important;
+        padding: 0 12px !important;
+        border-radius: 10px !important;
+        font-weight: 700 !important;
     }
 
-    /* === TABLE - THIN BORDERS INSIDE === */
+    /* --- Table --- */
     .marksheet-table {
         width: 100% !important;
         border-collapse: collapse !important;
@@ -2410,30 +2478,30 @@ img {
 
     .marksheet-table thead th {
         text-align: left !important;
-        color: #0a1628 !important;
-        border-bottom: 1.5px solid #0a1628 !important;
+        color: #1a3a6b !important;
+        border-bottom: 1.5px solid #1a3a6b !important;
         padding: 3px 4px !important;
-        font-size: 0.55rem !important;
+        font-size: 0.6rem !important;
         text-transform: uppercase !important;
-        font-weight: 700 !important;
+        font-weight: 800 !important;
         letter-spacing: 0.3px !important;
     }
 
     .marksheet-table tbody td {
         color: #0a1628 !important;
-        border-bottom: 1px solid #ddd !important;
+        border-bottom: 1px solid #e0e0e0 !important;
         padding: 2px 4px !important;
         font-weight: 500 !important;
-        font-size: 0.65rem !important;
+        font-size: 0.7rem !important;
     }
 
     .marksheet-table tbody td strong {
-        color: #0a1628 !important;
+        color: #1a3a6b !important;
         font-weight: 700 !important;
     }
 
     .marksheet-table tfoot td {
-        border-top: 1.5px solid #0a1628 !important;
+        border-top: 1.5px solid #1a3a6b !important;
         color: #0a1628 !important;
         padding: 3px 4px !important;
         font-weight: 700 !important;
@@ -2445,50 +2513,43 @@ img {
         font-weight: 700 !important;
     }
 
-    /* === GRAND TOTAL === */
+    /* --- Grand Total --- */
     .marksheet-grand-total {
-        background: #e8f0fe !important;
-        border: 2px solid #0a1628 !important;
+        background: #f0f4f8 !important;
+        border: 2px solid #CC0000 !important;
         padding: 6px 20px !important;
         margin: 6px 0 10px 0 !important;
         border-radius: 4px !important;
         display: flex !important;
         justify-content: space-between !important;
         align-items: center !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .grand-total-left,
-    .grand-total-right {
-        display: flex !important;
-        align-items: center !important;
-        gap: 8px !important;
+        position: relative !important;
+        z-index: 1 !important;
     }
 
     .grand-label {
-        color: #0a1628 !important;
-        font-size: 0.75rem !important;
         font-weight: 700 !important;
+        color: #1a3a6b !important;
+        font-size: 0.85rem !important;
     }
 
     .grand-value {
-        color: #0a1628 !important;
-        font-size: 1.1rem !important;
+        font-size: 1.2rem !important;
         font-weight: 900 !important;
+        color: #CC0000 !important;
     }
 
     .grand-percentage {
-        color: #0a1628 !important;
-        font-size: 1.2rem !important;
+        font-size: 1.3rem !important;
         font-weight: 900 !important;
+        color: #CC0000 !important;
         background: none !important;
-        -webkit-text-fill-color: #0a1628 !important;
+        -webkit-text-fill-color: #CC0000 !important;
     }
 
-    /* === FOOTER - QR CODE & LABEL IN ONE LINE === */
+    /* --- Footer --- */
     .marksheet-footer {
-        border-top: 2px solid #0a1628 !important;
+        border-top: 3px solid #CC0000 !important;
         padding-top: 8px !important;
         margin-bottom: 0 !important;
         display: flex !important;
@@ -2516,7 +2577,7 @@ img {
 
     .sign-line span {
         color: #0a1628 !important;
-        font-size: 0.65rem !important;
+        font-size: 0.7rem !important;
         font-weight: 500 !important;
         display: block !important;
         line-height: 1.3 !important;
@@ -2524,11 +2585,11 @@ img {
 
     .footer-date {
         color: #0a1628 !important;
-        font-size: 0.65rem !important;
+        font-size: 0.7rem !important;
         font-weight: 500 !important;
     }
 
-    /* QR CODE - BIGGER SIZE & LABEL IN SAME LINE */
+    /* --- QR Code --- */
     .footer-qr {
         display: flex !important;
         flex-direction: row !important;
@@ -2537,75 +2598,30 @@ img {
     }
 
     .footer-qr #qrCodeContainer {
-        border: 1.5px solid #0a1628 !important;
+        border: 1.5px solid #1a3a6b !important;
         padding: 4px !important;
         background: white !important;
-        width: 70px !important;
-        height: 70px !important;
+        width: 75px !important;
+        height: 75px !important;
         flex-shrink: 0 !important;
     }
 
     .footer-qr #qrCodeContainer img,
     .footer-qr #qrCodeContainer canvas {
-        width: 62px !important;
-        height: 62px !important;
+        width: 67px !important;
+        height: 67px !important;
     }
 
     .footer-qr .qr-label {
-        color: #0a1628 !important;
-        font-size: 0.6rem !important;
+        color: #1a3a6b !important;
+        font-size: 0.65rem !important;
         font-weight: 700 !important;
         letter-spacing: 0.5px !important;
         text-transform: uppercase !important;
         white-space: nowrap !important;
     }
 
-    /* === RANK BADGE === */
-    .rank-badge {
-        background: #ffd700 !important;
-        color: #0a1628 !important;
-        padding: 1px 12px !important;
-        border-radius: 10px !important;
-        font-size: 0.7rem !important;
-        font-weight: 700 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .rank-1 {
-        background: #ffd700 !important;
-        color: #0a1628 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .rank-2 {
-        background: #c0c0c0 !important;
-        color: #0a1628 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .rank-3 {
-        background: #cd7f32 !important;
-        color: white !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    .rank-other {
-        background: #e8e8e8 !important;
-        color: #0a1628 !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-    }
-
-    /* === HIDE ACTION BUTTONS === */
-    .marksheet-actions {
-        display: none !important;
-    }
-
-    /* === PAGE SETTINGS - SINGLE PAGE === */
+    /* --- Page Settings --- */
     @page {
         margin: 0.15in 0.15in !important;
         size: A4 portrait !important;
@@ -2618,119 +2634,84 @@ img {
         color: #0a1628 !important;
         height: 100% !important;
         overflow: hidden !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 
     html {
         height: 100% !important;
         overflow: hidden !important;
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
     }
 }
 
-/* ============================================================
-   RESPONSIVE - PRINT (Mobile)
-   ============================================================ */
+/* --- Hide QR Label in Screen if not needed --- */
+.marksheet-footer .qr-label {
+    display: block;
+}
+
+/* --- Responsive for Mobile Print --- */
 @media print and (max-width: 768px) {
     .marksheet-card {
-        padding: 12px 14px !important;
-        border-width: 3px !important;
-        min-height: 100vh !important;
+        padding: 15px 18px !important;
+        border-width: 4px !important;
     }
 
     .marksheet-institute h2 {
-        font-size: 1.2rem !important;
+        font-size: 1.4rem !important;
+        letter-spacing: 1px !important;
     }
 
-    .marksheet-institute p {
-        font-size: 0.6rem !important;
-    }
-
-    .marksheet-title h3 {
+    .marksheet-institute .sub-title {
         font-size: 0.7rem !important;
     }
 
-    .marksheet-status {
+    .marksheet-institute .ssrgsp-name {
+        font-size: 0.7rem !important;
+    }
+
+    .marksheet-institute .ssrgsp-location {
         font-size: 0.6rem !important;
-        padding: 1px 10px !important;
     }
 
-    .marksheet-student-info {
-        grid-template-columns: 1fr !important;
-        gap: 3px !important;
-        padding: 6px 12px !important;
+    .marksheet-student-summary {
+        padding: 6px 14px !important;
     }
 
-    .student-detail {
-        flex-direction: row !important;
+    .marksheet-student-summary .summary-row {
+        flex-direction: column !important;
         gap: 4px !important;
     }
 
-    .student-detail .label {
-        font-size: 0.5rem !important;
-    }
-
-    .student-detail .value {
-        font-size: 0.75rem !important;
+    .marksheet-student-summary .summary-item .value {
+        font-size: 0.85rem !important;
     }
 
     .marksheet-academic {
         grid-template-columns: 1fr !important;
-        gap: 6px !important;
+        gap: 8px !important;
     }
 
     .marksheet-semester {
         padding: 6px 8px !important;
     }
 
-    .semester-header h4 {
-        font-size: 0.65rem !important;
-    }
-
-    .marksheet-table {
-        font-size: 0.6rem !important;
-    }
-
-    .marksheet-table thead th {
-        font-size: 0.5rem !important;
-        padding: 2px 3px !important;
-    }
-
-    .marksheet-table tbody td {
-        font-size: 0.55rem !important;
-        padding: 2px 3px !important;
-    }
-
-    .marksheet-table tfoot td {
-        font-size: 0.6rem !important;
-        padding: 2px 3px !important;
-    }
-
     .marksheet-grand-total {
         flex-direction: column !important;
         text-align: center !important;
-        gap: 3px !important;
+        gap: 4px !important;
         padding: 6px 12px !important;
     }
 
-    .grand-label {
-        font-size: 0.65rem !important;
-    }
-
     .grand-value {
-        font-size: 0.95rem !important;
+        font-size: 1rem !important;
     }
 
     .grand-percentage {
-        font-size: 1rem !important;
+        font-size: 1.1rem !important;
     }
 
     .marksheet-footer {
         flex-direction: column !important;
         text-align: center !important;
-        gap: 5px !important;
+        gap: 6px !important;
     }
 
     .footer-center {
@@ -2742,14 +2723,6 @@ img {
         text-align: center !important;
     }
 
-    .sign-line span {
-        font-size: 0.55rem !important;
-    }
-
-    .footer-date {
-        font-size: 0.55rem !important;
-    }
-
     .footer-qr {
         flex-direction: row !important;
         gap: 8px !important;
@@ -2757,47 +2730,23 @@ img {
     }
 
     .footer-qr #qrCodeContainer {
-        width: 55px !important;
-        height: 55px !important;
+        width: 60px !important;
+        height: 60px !important;
     }
 
     .footer-qr #qrCodeContainer img,
     .footer-qr #qrCodeContainer canvas {
-        width: 47px !important;
-        height: 47px !important;
+        width: 52px !important;
+        height: 52px !important;
     }
 
     .footer-qr .qr-label {
-        font-size: 0.5rem !important;
-    }
-
-    .print-shadow-blue {
-        width: 150px !important;
-        height: 150px !important;
-        top: -40px !important;
-        right: -40px !important;
-        left: auto !important;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='b' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' style='stop-color:%234285f4;stop-opacity:0.30'/%3E%3Cstop offset='100%25' style='stop-color:%234285f4;stop-opacity:0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50%25' cy='50%25' r='50%25' fill='url(%23b)'/%3E%3C/svg%3E") !important;
-        background-size: 100% 100% !important;
-    }
-
-    .print-shadow-orange {
-        width: 150px !important;
-        height: 150px !important;
-        bottom: -40px !important;
-        left: -40px !important;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg'%3E%3Cdefs%3E%3CradialGradient id='o' cx='50%25' cy='50%25' r='50%25'%3E%3Cstop offset='0%25' style='stop-color:%23ff8c00;stop-opacity:0.35'/%3E%3Cstop offset='100%25' style='stop-color:%23ff8c00;stop-opacity:0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50%25' cy='50%25' r='50%25' fill='url(%23o)'/%3E%3C/svg%3E") !important;
-        background-size: 100% 100% !important;
+        font-size: 0.55rem !important;
     }
 
     .print-watermark-logo {
-        width: 150px !important;
-        height: 150px !important;
-    }
-
-    .rank-badge {
-        font-size: 0.6rem !important;
-        padding: 1px 8px !important;
+        width: 180px !important;
+        height: 180px !important;
     }
 
     @page {

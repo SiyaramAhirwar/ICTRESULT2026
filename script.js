@@ -1123,42 +1123,39 @@ function createResultCard(student) {
     
     return `
         <div class="result-card marksheet-card fade-in">
-            <!-- PRINT ELEMENTS -->
+            <!-- WATERMARK LOGO -->
             <div class="print-watermark-logo"></div>
-            <div class="print-shadow-blue"></div>
-            <div class="print-shadow-orange"></div>
             
             <!-- HEADER -->
             <div class="marksheet-header">
                 <div class="marksheet-institute">
-                    <h2>SANT SHIROMANI RAVIDAS GLOBAL SKILLS PARK</h2>
-                    <p>Bhopal, Madhya Pradesh</p>
-                </div>
-                <div class="marksheet-title">
-                    <h3>Student Marksheet</h3>
-                    <span class="marksheet-status ${statusClass}">
-                        <i class="fas ${student.combined.finalStatus.includes('PASS') ? 'fa-check-circle' : 'fa-times-circle'}"></i>
-                        ${student.combined.finalStatus}
-                    </span>
+                <h2>SANT SHIROMANI RAVIDAS</h2>
+                                <div class="marksheet-institute1">
+                <h2>GLOBAL SKILLS PARK</h2> </div>
+                    <div class="sub-title">BHOPAL-MADHYA PRADESH</div>
+                    
                 </div>
             </div>
 
-            <!-- STUDENT INFO - Single Line (Name Left | Enrollment Right) -->
-            <div class="marksheet-student-info">
-                <div class="student-detail">
-                    <span class="label">Student Name</span>
-                    <span class="value">${student.name}</span>
+            <!-- STUDENT SUMMARY -->
+            <div class="marksheet-student-summary">
+                <div class="summary-title">Student Summary</div>
+                <div class="summary-row">
+                    <div class="summary-item">
+                        <span class="label">Name -</span>
+                        <span class="value">${student.name}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="label">Enrollment -</span>
+                        <span class="value">${student.id}</span>
+                    </div>
                 </div>
-                <div class="student-detail">
-                    <span class="label">Enrollment No.</span>
-                    <span class="value">${student.id}</span>
-                </div>
-                <div class="student-detail">
-                    <span class="label">Rank</span>
-                    <span class="value rank-badge ${rankClass}">
-                        <i class="fas fa-trophy"></i> #${student.combined.rank}
-                    </span>
-                </div>
+            </div>
+
+            <!-- COURSE DETAILS -->
+            <div class="marksheet-course-details">
+                <span class="course-label">Branch:</span>
+                <span class="course-value">Advance Networking and System Administration</span>
             </div>
 
             <!-- ACADEMIC RECORDS -->
@@ -1172,9 +1169,9 @@ function createResultCard(student) {
                     <table class="marksheet-table">
                         <thead>
                             <tr>
-                                <th>Code</th>
+                                <th>Paper Code</th>
                                 <th>Paper Name</th>
-                                <th>Marks</th>
+                                <th>Obt Marks</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1188,11 +1185,11 @@ function createResultCard(student) {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="2"><strong>Total</strong></td>
+                                <td colspan="2"><strong>Total Marks:</strong></td>
                                 <td><strong>${student.semester1.total}</strong></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><strong>Result</strong></td>
+                                <td colspan="2"><strong>Result:</strong></td>
                                 <td><span class="status-pass">${student.semester1.result}</span></td>
                             </tr>
                         </tfoot>
@@ -1208,9 +1205,9 @@ function createResultCard(student) {
                     <table class="marksheet-table">
                         <thead>
                             <tr>
-                                <th>Code</th>
+                                <th>Paper Code</th>
                                 <th>Paper Name</th>
-                                <th>Marks</th>
+                                <th>Obt Marks</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -1224,11 +1221,11 @@ function createResultCard(student) {
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="2"><strong>Total</strong></td>
+                                <td colspan="2"><strong>Total Marks:</strong></td>
                                 <td><strong>${student.semester2.total}</strong></td>
                             </tr>
                             <tr>
-                                <td colspan="2"><strong>Result</strong></td>
+                                <td colspan="2"><strong>Result:</strong></td>
                                 <td><span class="status-pass">${student.semester2.result}</span></td>
                             </tr>
                         </tfoot>
@@ -1236,19 +1233,19 @@ function createResultCard(student) {
                 </div>
             </div>
 
-            <!-- GRAND TOTAL - Single Line (Total Left | Percentage Right) -->
+            <!-- GRAND TOTAL -->
             <div class="marksheet-grand-total">
                 <div class="grand-total-left">
-                    <span class="grand-label">Grand Total</span>
+                    <span class="grand-label">Grand Total Marks:</span>
                     <span class="grand-value">${student.combined.total}</span>
                 </div>
                 <div class="grand-total-right">
-                    <span class="grand-label">Percentage</span>
+                    <span class="grand-label">Percentage:</span>
                     <span class="grand-percentage">${student.combined.percentage}%</span>
                 </div>
             </div>
 
-            <!-- FOOTER - QR Code in Center -->
+            <!-- FOOTER -->
             <div class="marksheet-footer">
                 <div class="footer-left">
                     <div class="sign-line">
@@ -1269,7 +1266,7 @@ function createResultCard(student) {
                 </div>
             </div>
 
-            <!-- ACTION BUTTONS (Hidden in Print) -->
+            <!-- ACTION BUTTONS -->
             <div class="marksheet-actions">
                 <button onclick="printResult()" class="action-btn print-btn" title="Print Marksheet">
                     <i class="fas fa-print"></i> Print
@@ -1277,7 +1274,6 @@ function createResultCard(student) {
                 <button onclick="downloadPDF()" class="action-btn pdf-btn" title="Download PDF">
                     <i class="fas fa-file-pdf"></i> PDF
                 </button>
-                
             </div>
         </div>
     `;

@@ -909,7 +909,7 @@ const studentData = [
     // ===== RANK 51 =====
     {
         id: "SSRGSP/NET/2025/1/001",
-        name: "DEMO STUDENT",
+        name: "Isha Malhotra",
         semester1: {
             subjects: { "NET_M1": 0, "NET_M2": 0, "NET_M3": 0, "NET_M4": 0, "PPD1": 0 },
             total: 0,
@@ -1130,7 +1130,7 @@ function createResultCard(student) {
             <div class="marksheet-header">
                 <div class="marksheet-institute">
                 <h2>SANT SHIROMANI RAVIDAS</h2>
-                                <div class="marksheet-institute1">
+               <div class="marksheet-institute1">
                 <h2>GLOBAL SKILLS PARK</h2> </div>
                     <div class="sub-title">BHOPAL-MADHYA PRADESH</div>
                     
@@ -1290,7 +1290,7 @@ function generateQRCode(studentId) {
     container.innerHTML = '';
     
     // === LIVE WEBSITE URL ===
-    const baseUrl = 'https://iyaramahirwar.github.io/ICTRESULT2026/index.html';
+    const baseUrl = 'https://iyaramahirwar.github.io/ICTRESULT2026/';
     const qrUrl = baseUrl + '?id=' + encodeURIComponent(studentId);
     
     console.log('✅ QR URL:', qrUrl);
@@ -1819,7 +1819,7 @@ function shareResult() {
     const enrollText = enrollment.textContent.replace('📋 ', '').trim();
     const percentText = percentage.textContent || 'N/A';
     
-    const shareText = `🎓 SSR-GSP Result\n\n👤 Student: ${name}\n📋 Enrollment: ${enrollText}\n📊 Percentage: ${percentText}\n\n🔗 Check your result at SSR-GSP Result Portal`;
+    const shareText = `🎓 SSRGSP ICT Result\n\n👤 Student: ${name}\n📋 Enrollment: ${enrollText}\n📊 Percentage: ${percentText}\n\n🔗 Check your result at SSRGSP ICT Result Portal`;
     
     // Try native share first (mobile)
     if (navigator.share) {

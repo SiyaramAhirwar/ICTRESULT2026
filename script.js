@@ -1290,7 +1290,7 @@ function generateQRCode(studentId) {
     container.innerHTML = '';
     
     // === LIVE WEBSITE URL ===
-    const baseUrl = 'https://iyaramahirwar.github.io/ICTRESULT2026/';
+    const baseUrl = 'https://siyaramahirwar.github.io/ICTRESULT2026/index.html';
     const qrUrl = baseUrl + '?id=' + encodeURIComponent(studentId);
     
     console.log('✅ QR URL:', qrUrl);

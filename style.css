@@ -193,19 +193,20 @@ img {
 }
 
 .nav-logo i {
-    font-size: 1.6rem;
+    font-size: 1.9rem;
     color: var(--accent-color);
 }
 
 .nav-logo span {
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background-color: #0142ac;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    font: size 1.9rem;
 }
 
 .nav-logo small {
-    font-size: 0.6rem;
+    font-size: 0.7rem;
     font-weight: 400;
     -webkit-text-fill-color: initial;
     color: var(--text-muted);
@@ -431,7 +432,7 @@ img {
 }
 
 .hero-content h1 span {
-    background: linear-gradient(135deg, #4285f4, #ea4335);
+    background: linear-gradient(130deg, #023e9e, #ff9900);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -702,611 +703,441 @@ img {
 }
 
 /* ============================================================
-   MARKSHEET CARD - GSP 2026 CERTIFICATE STYLE
+   OFFICIAL SSRGSP MARKSHEET - SCREEN
    ============================================================ */
 
-/* --- Screen Style --- */
-.marksheet-card {
-    max-width: 900px;
-    margin: 0 auto;
-    background: #ffffff;
-    border-radius: 0;
-    padding: 30px 35px 25px 35px;
-    box-shadow: var(--card-shadow);
-    border: 4px solid #CC0000 !important;
-    position: relative;
-    overflow: visible;
-}
-
-[data-theme="dark"] .marksheet-card {
-    background: var(--bg-secondary);
-    border-color: #ff4444 !important;
-}
-
-/* Screen Shadows - Hide */
-.marksheet-card .print-shadow-blue,
-.marksheet-card .print-shadow-orange {
-    display: none;
-}
-
-/* Screen Watermark - Show */
-.marksheet-card .print-watermark-logo {
-    display: block !important;
-    position: absolute !important;
-    top: 50% !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: 200px !important;
-    height: 200px !important;
-    background-image: url('../images/gsp-logo.png') !important;
-    background-size: contain !important;
-    background-repeat: no-repeat !important;
-    background-position: center !important;
-    opacity: 0.04 !important;
-    pointer-events: none !important;
-    z-index: 0 !important;
-}
-
-[data-theme="dark"] .marksheet-card .print-watermark-logo {
-    opacity: 0.08 !important;
-}
-
-/* Header - Screen */
-.marksheet-header {
-    text-align: center;
-    padding-bottom: 4px;
-    border-bottom: 2px solid #CC0000;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 1;
-}
-
-[data-theme="dark"] .marksheet-header {
-    border-bottom-color: #ff4444;
-}
-
-.marksheet-institute h2 {
-    font-size: 1.8rem;
-    font-weight: 900;
-    color: #CC0000;
-    text-align: center;
-    letter-spacing: 2px;
-    margin: 0;
-    text-transform: uppercase;
-    font-family: 'Inter', Arial, sans-serif;
-}
-
-[data-theme="dark"] .marksheet-institute h2 {
-    color: #ff4444;
-}
-
-.marksheet-institute .sub-title {
-    color: #1a3a6b;
-    font-size: 0.85rem;
-    text-align: center;
-    margin: 2px 0 0 0;
-    font-weight: 600;
-    letter-spacing: 1px;
-}
-
-[data-theme="dark"] .marksheet-institute .sub-title {
-    color: #8b83ff;
-}
-
-.marksheet-institute .ssrgsp-name {
-    margin-top: 4px;
-    font-size: 0.8rem;
-    color: #1a3a6b;
-    font-weight: 600;
-}
-
-[data-theme="dark"] .marksheet-institute .ssrgsp-name {
-    color: #b0b0d0;
-}
-
-.marksheet-institute .ssrgsp-location {
-    font-size: 0.7rem;
-    color: #666;
-    font-weight: 500;
-}
-
-[data-theme="dark"] .marksheet-institute .ssrgsp-location {
-    color: #8888aa;
-}
-
-/* Student Summary - Screen */
-.marksheet-student-summary {
-    background: #f8f4f0;
-    border: 1.5px solid #CC0000;
-    padding: 8px 20px;
-    margin: 8px 0 10px 0;
-    border-radius: 4px;
-    position: relative;
-    z-index: 1;
-}
-
-[data-theme="dark"] .marksheet-student-summary {
-    background: #1a1a2e;
-    border-color: #ff4444;
-}
-
-.marksheet-student-summary .summary-title {
-    font-size: 0.8rem;
-    font-weight: 800;
-    color: #1a3a6b;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: 2px;
-}
-
-[data-theme="dark"] .marksheet-student-summary .summary-title {
-    color: #8b83ff;
-}
-
-.marksheet-student-summary .summary-row {
-    display: flex;
-    gap: 30px;
-    flex-wrap: wrap;
-}
-
-.marksheet-student-summary .summary-item {
-    display: flex;
-    align-items: center;
-    gap: 4px;
-}
-
-.marksheet-student-summary .summary-item .label {
-    color: #1a3a6b;
-    font-size: 0.7rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    opacity: 0.7;
-}
-
-[data-theme="dark"] .marksheet-student-summary .summary-item .label {
-    color: #b0b0d0;
-}
-
-.marksheet-student-summary .summary-item .value {
-    color: #0a1628;
-    font-size: 0.9rem;
-    font-weight: 700;
-}
-
-[data-theme="dark"] .marksheet-student-summary .summary-item .value {
-    color: #f0f0ff;
-}
-
-/* Course Details - Screen */
-.marksheet-course-details {
-    margin: 6px 0 10px 0;
-    padding: 0 4px;
-    position: relative;
-    z-index: 1;
-}
-
-.marksheet-course-details .course-label {
-    font-size: 0.7rem;
-    font-weight: 700;
-    color: #1a3a6b;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-[data-theme="dark"] .marksheet-course-details .course-label {
-    color: #8b83ff;
-}
-
-.marksheet-course-details .course-value {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #0a1628;
-}
-
-[data-theme="dark"] .marksheet-course-details .course-value {
-    color: #f0f0ff;
-}
-
-/* Academic Records - Screen */
-.marksheet-academic {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
-    margin-bottom: 8px;
-    position: relative;
-    z-index: 1;
-}
-
-.marksheet-semester {
-    background: #fafafa;
-    border: 1.5px solid #1a3a6b;
-    padding: 8px 10px;
-    border-radius: 4px;
-}
-
-[data-theme="dark"] .marksheet-semester {
-    background: #1a1a2e;
-    border-color: #8b83ff;
-}
-
-.semester-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 4px;
-    padding-bottom: 3px;
-    border-bottom: 2px solid #CC0000;
-}
-
-[data-theme="dark"] .semester-header {
-    border-bottom-color: #ff4444;
-}
-
-.semester-header h4 {
-    font-size: 0.85rem;
-    font-weight: 900;
-    color: #CC0000;
-    margin: 0;
-}
-
-[data-theme="dark"] .semester-header h4 {
-    color: #ff4444;
-}
-
-.semester-status {
-    font-size: 0.6rem;
-    color: #1a3a6b;
-    background: #e8f0fe;
-    padding: 0 12px;
-    border-radius: 10px;
-    font-weight: 700;
-}
-
-[data-theme="dark"] .semester-status {
-    color: #b0b0d0;
-    background: #2a2a4e;
-}
-
-/* Table - Screen */
-.marksheet-table {
+.official-marksheet {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 0.7rem;
+    max-width: 900px;
+    margin: 35px auto;
+    padding: 28px 30px 22px;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #303030;
+    border: 1px solid #d9d9d9;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.10);
+    position: relative;
+    overflow: hidden;
+    font-family: "Inter", Arial, sans-serif;
 }
 
-.marksheet-table thead th {
-    text-align: left;
-    color: #1a3a6b;
-    border-bottom: 1.5px solid #1a3a6b;
-    padding: 3px 4px;
-    font-size: 0.6rem;
-    text-transform: uppercase;
-    font-weight: 800;
-    letter-spacing: 0.3px;
+[data-theme="dark"] .official-marksheet {
+    background: #ffffff;
+    color: #303030;
 }
 
-[data-theme="dark"] .marksheet-table thead th {
-    color: #8b83ff;
-    border-bottom-color: #8b83ff;
-}
-
-.marksheet-table tbody td {
-    color: #0a1628;
-    border-bottom: 1px solid #e0e0e0;
-    padding: 2px 4px;
-    font-weight: 500;
-    font-size: 0.65rem;
-}
-
-[data-theme="dark"] .marksheet-table tbody td {
-    color: #f0f0ff;
-    border-bottom-color: #2a2a4e;
-}
-
-.marksheet-table tbody td strong {
-    color: #1a3a6b;
-    font-weight: 700;
-}
-
-[data-theme="dark"] .marksheet-table tbody td strong {
-    color: #8b83ff;
-}
-
-.marksheet-table tfoot td {
-    border-top: 1.5px solid #1a3a6b;
-    color: #0a1628;
-    padding: 3px 4px;
-    font-weight: 700;
-    font-size: 0.7rem;
-}
-
-[data-theme="dark"] .marksheet-table tfoot td {
-    border-top-color: #8b83ff;
-    color: #f0f0ff;
-}
-
-.marksheet-table tfoot .status-pass {
-    color: #2e7d32;
-    font-weight: 700;
-}
-
-[data-theme="dark"] .marksheet-table tfoot .status-pass {
-    color: #4caf50;
-}
-
-/* Grand Total - Screen */
-.marksheet-grand-total {
-    background: #f0f4f8;
-    border: 2px solid #CC0000;
-    padding: 6px 20px;
-    margin: 6px 0 10px 0;
-    border-radius: 4px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.official-marksheet .marksheet-header {
+    text-align: center;
+    padding: 0 0 12px;
+    border: 0;
+    margin: 0;
     position: relative;
     z-index: 1;
 }
 
-[data-theme="dark"] .marksheet-grand-total {
-    background: #1a1a2e;
-    border-color: #ff4444;
-}
-
-.grand-total-left,
-.grand-total-right {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.grand-label {
-    font-weight: 700;
-    color: #1a3a6b;
-    font-size: 0.8rem;
-}
-
-[data-theme="dark"] .grand-label {
-    color: #8b83ff;
-}
-
-.grand-value {
-    font-size: 1.1rem;
-    font-weight: 900;
-    color: #CC0000;
-}
-
-[data-theme="dark"] .grand-value {
-    color: #ff4444;
-}
-
-.grand-percentage {
-    font-size: 1.2rem;
-    font-weight: 900;
-    color: #CC0000;
-    background: none !important;
-    -webkit-text-fill-color: #CC0000 !important;
-}
-
-[data-theme="dark"] .grand-percentage {
-    color: #ff4444 !important;
-    -webkit-text-fill-color: #ff4444 !important;
-}
-
-/* Footer - Screen */
-.marksheet-footer {
-    border-top: 2px solid #CC0000;
-    padding-top: 8px;
-    margin-bottom: 0;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 8px;
-    position: relative;
-    z-index: 1;
-}
-
-[data-theme="dark"] .marksheet-footer {
-    border-top-color: #ff4444;
-}
-
-.footer-left {
-    flex: 0 0 auto;
-}
-
-.footer-center {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.footer-right {
-    flex: 0 0 auto;
-    text-align: right;
-}
-
-.sign-line span {
-    color: #0a1628;
-    font-size: 0.65rem;
-    font-weight: 500;
+.official-marksheet .marksheet-logo {
     display: block;
+    width: 245px;
+    max-height: 250px;
+    height: auto;
+    object-fit: contain;
+    margin: 0 auto 8px;
+}
+
+.official-marksheet .marksheet-header h1 {
+    margin: 0;
+    font-size: 28px;
+    line-height: 1.25;
+    font-weight: 600;
+    color: #303030;
+}
+
+.official-marksheet .marksheet-location {
+    margin-top: 6px;
+    font-size: 21px;
+    font-weight: 500;
+    color: #303030;
+}
+
+.official-marksheet .marksheet-student-summary {
+    margin-top: 8px;
+    border: 2px solid #19a99c;
+    background: #19b8a8;
+    color: #ffffff;
+    position: relative;
+    z-index: 1;
+}
+
+.official-marksheet .summary-title {
+    padding: 12px 15px;
+    text-align: center;
+    background: #1aa99d;
+    border-bottom: 1px solid rgba(255,255,255,.45);
+    font-size: 23px;
+    font-weight: 600;
+}
+
+.official-marksheet .summary-row {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    padding: 10px 15px;
+    box-sizing: border-box;
+}
+
+.official-marksheet .summary-dot {
+    width: 14px;
+    height: 14px;
+    flex: 0 0 14px;
+    margin-right: 14px;
+    background: #ffffff;
+    border-radius: 50%;
+}
+
+.official-marksheet .summary-details {
+    font-size: 19px;
     line-height: 1.3;
 }
 
-[data-theme="dark"] .sign-line span {
-    color: #b0b0d0;
+.official-marksheet .summary-item {
+    display: flex;
+    gap: 7px;
 }
 
-.footer-date {
-    color: #0a1628;
-    font-size: 0.65rem;
+.official-marksheet .summary-item .value {
     font-weight: 500;
 }
 
-[data-theme="dark"] .footer-date {
-    color: #b0b0d0;
+.official-marksheet .marksheet-section {
+    margin-top: 20px;
 }
 
-/* QR Code - Screen */
-.footer-qr {
+.official-marksheet .marksheet-section-title {
+    margin: 0 0 9px;
+    padding-left: 10px;
+    border-left: 5px solid #579c64;
+    font-size: 28px;
+    line-height: 1.2;
+    font-weight: 500;
+    color: #303030;
+}
+
+.official-marksheet .personal-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 17px;
+}
+
+.official-marksheet .personal-table th,
+.official-marksheet .personal-table td {
+    border: 1px solid #d9d9d9;
+    padding: 9px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+.official-marksheet .personal-table th {
+    width: 43%;
+    font-weight: 500;
+}
+
+.official-marksheet .personal-table td {
+    font-weight: 500;
+}
+
+.official-marksheet .academic-records {
+    width: 100%;
+    border: 1px solid #d8d8d8;
+}
+
+.official-marksheet .academic-term {
+    width: 100%;
+}
+
+.official-marksheet .term-title-row {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    min-height: 42px;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.official-marksheet .term-name {
     display: flex;
-    flex-direction: row !important;
     align-items: center;
-    gap: 10px !important;
-}
-
-.footer-qr #qrCodeContainer {
-    border: 1.5px solid #1a3a6b;
-    padding: 4px;
-    background: white;
-    border-radius: 4px;
-    width: 70px;
-    height: 70px;
-    flex-shrink: 0;
-}
-
-[data-theme="dark"] .footer-qr #qrCodeContainer {
-    border-color: #8b83ff;
-    background: #1a1a2e;
-}
-
-.footer-qr #qrCodeContainer img,
-.footer-qr #qrCodeContainer canvas {
-    width: 62px !important;
-    height: 62px !important;
-}
-
-.footer-qr .qr-label {
-    color: #1a3a6b;
-    font-size: 0.6rem;
+    padding: 7px 8px;
+    color: #d00000;
     font-weight: 700;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-size: 17px;
+}
+
+.official-marksheet .term-status {
+    display: flex;
+    align-items: center;
+    padding: 7px 8px;
+    font-size: 16px;
+    border-left: 1px solid #d8d8d8;
+}
+
+.official-marksheet .term-table-wrapper {
+    padding: 10px 8px 10px 20%;
+}
+
+.official-marksheet .marksheet-table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 16px;
+}
+
+.official-marksheet .marksheet-table th,
+.official-marksheet .marksheet-table td {
+    border: 1px solid #d8d8d8;
+    padding: 7px;
+    text-align: left;
+    vertical-align: middle;
+    line-height: 1.25;
+}
+
+.official-marksheet .marksheet-table th {
+    font-weight: 700;
+    background: #ffffff;
+}
+
+.official-marksheet .marksheet-table th:nth-child(1),
+.official-marksheet .marksheet-table td:nth-child(1) {
+    width: 29%;
+}
+
+.official-marksheet .marksheet-table th:nth-child(2),
+.official-marksheet .marksheet-table td:nth-child(2) {
+    width: 43%;
+}
+
+.official-marksheet .marksheet-table th:nth-child(3),
+.official-marksheet .marksheet-table td:nth-child(3) {
+    width: 28%;
+}
+
+.official-marksheet .term-total-row {
+    display: grid;
+    grid-template-columns: 20% 80%;
+    min-height: 48px;
+    border-top: 1px solid #d8d8d8;
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.official-marksheet .term-total-box {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 8px;
+}
+
+.official-marksheet .term-total-box > span,
+.official-marksheet .term-total-box > strong {
+    min-height: 34px;
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 9px;
+    box-sizing: border-box;
+    border: 1px solid #d8d8d8;
+    font-size: 15px;
+}
+
+.official-marksheet .total-label,
+.official-marksheet .total-number {
+    color: #21822b;
+    font-weight: 700;
+}
+
+.official-marksheet .result-label {
+    font-weight: 700;
+}
+
+.official-marksheet .marksheet-status-pass {
+    color: #222222;
+    font-weight: 700;
+}
+
+.official-marksheet .marksheet-status-grace {
+    color: #9b6500;
+    font-weight: 700;
+}
+
+.official-marksheet .marksheet-status-fail {
+    color: #d00000;
+    font-weight: 700;
+}
+
+.official-marksheet .grand-total-row {
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+    padding: 0 8px;
+    border-top: 1px solid #d8d8d8;
+    font-size: 18px;
+}
+
+.official-marksheet .grand-total-row span {
+    margin-left: 20%;
+}
+
+.official-marksheet .grand-total-row strong {
+    margin-left: 5px;
+    color: #21822b;
+    font-weight: 700;
+}
+
+.official-marksheet .marksheet-footer {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 15px;
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 1px solid #d9d9d9;
+    font-size: 11px;
+    color: #777777;
+    position: relative;
+    z-index: 1;
+}
+
+.official-marksheet .footer-left {
+    text-align: left;
+}
+
+.official-marksheet .footer-right {
+    text-align: right;
+}
+
+.official-marksheet .sign-line {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.official-marksheet .footer-date {
     white-space: nowrap;
 }
 
-[data-theme="dark"] .footer-qr .qr-label {
-    color: #8b83ff;
+.official-marksheet .footer-center {
+    display: flex;
+    justify-content: center;
 }
 
-/* Rank Badges */
-.rank-badge {
-    display: inline-block;
-    padding: 1px 10px;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 0.75rem;
+.official-marksheet .footer-qr {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
 }
 
-.rank-1 {
-    background: #ffd700;
-    color: #1a1a2e;
+.official-marksheet .qr-code-container {
+    width: 82px;
+    height: 82px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
 }
 
-.rank-2 {
-    background: #c0c0c0;
-    color: #1a1a2e;
+.official-marksheet .qr-code-container img,
+.official-marksheet .qr-code-container canvas {
+    width: 82px !important;
+    height: 82px !important;
+    display: block;
 }
 
-.rank-3 {
-    background: #cd7f32;
-    color: white;
+.official-marksheet .qr-label {
+    font-size: 9px;
+    color: #555555;
 }
 
-.rank-other {
-    background: var(--accent-light);
-    color: var(--accent-color);
+.official-marksheet .qr-fallback {
+    font-size: 11px;
+    color: #999999;
 }
 
-/* ============================================================
-   TOPPERS SECTION
-   ============================================================ */
-.toppers-section {
-    padding: 40px 24px;
-    max-width: 1100px;
-    margin: 0 auto;
+.official-marksheet .marksheet-actions {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-.toppers-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-    gap: 16px;
-}
-
-.topper-card {
-    background: var(--bg-glass);
-    backdrop-filter: var(--glass-blur);
-    -webkit-backdrop-filter: var(--glass-blur);
-    border: 1px solid var(--bg-glass-border);
-    border-radius: var(--border-radius);
-    padding: 20px 18px;
-    text-align: center;
-    transition: var(--transition);
-    position: relative;
-    overflow: hidden;
+.official-marksheet .marksheet-actions .action-btn {
+    border: 0;
+    padding: 11px 18px;
+    border-radius: 7px;
     cursor: pointer;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
 }
 
-.topper-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--card-hover-shadow);
+.official-marksheet .print-btn {
+    background: #222222;
+    color: #ffffff;
 }
 
-.topper-card .rank-badge {
-    position: absolute;
-    top: 12px;
-    right: 12px;
-    font-size: 1.5rem;
-    font-weight: 900;
-    opacity: 0.15;
+.official-marksheet .pdf-btn {
+    background: #d00000;
+    color: #ffffff;
 }
 
-.topper-card .rank-icon {
-    font-size: 2rem;
-    margin-bottom: 8px;
+.multiple-results {
+    max-width: 900px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 10px;
 }
 
-.topper-card h4 {
-    font-size: 1rem;
-    font-weight: 700;
-    margin-bottom: 2px;
-    color: var(--text-primary);
+.multiple-results-heading {
+    text-align: center;
 }
 
-.topper-card .topper-enroll {
-    font-size: 0.7rem;
-    color: var(--text-muted);
-    margin-bottom: 6px;
+.multiple-results-heading i {
+    font-size: 32px;
+    margin-bottom: 10px;
 }
 
-.topper-card .topper-percentage {
-    font-size: 1.5rem;
-    font-weight: 800;
-    color: var(--accent-color);
+.multiple-results-heading h3 {
+    margin: 0 0 5px;
 }
 
-.topper-card .topper-detail {
-    font-size: 0.75rem;
-    color: var(--text-secondary);
-    margin-top: 2px;
+.multiple-results-heading p {
+    margin: 0 0 20px;
 }
 
-.topper-card.gold {
-    border-color: var(--rank-gold);
-    background: linear-gradient(135deg, rgba(255, 215, 0, 0.08), transparent);
+.multiple-results-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
 }
 
-.topper-card.silver {
-    border-color: var(--rank-silver);
-    background: linear-gradient(135deg, rgba(192, 192, 192, 0.08), transparent);
+.student-result-option {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+    width: 100%;
+    padding: 15px;
+    background: #ffffff;
+    border: 1px solid #dddddd;
+    border-radius: 7px;
+    cursor: pointer;
+    text-align: left;
 }
 
-.topper-card.bronze {
-    border-color: var(--rank-bronze);
-    background: linear-gradient(135deg, rgba(205, 127, 50, 0.08), transparent);
+.student-result-option:hover {
+    border-color: #19a99c;
 }
+
 
 /* ============================================================
    STATISTICS SECTION
@@ -1828,39 +1659,6 @@ img {
     color: var(--danger-color);
 }
 
-/* ============================================================
-   BACK TO TOP
-   ============================================================ */
-.back-top-btn {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 999;
-    width: 44px;
-    height: 44px;
-    border: none;
-    border-radius: 50%;
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
-    color: white;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: var(--transition);
-    box-shadow: 0 4px 20px rgba(108, 99, 255, 0.3);
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-}
-
-.back-top-btn.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.back-top-btn:hover {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 30px rgba(108, 99, 255, 0.4);
-}
 
 /* ============================================================
    RESPONSIVE
@@ -2191,565 +1989,313 @@ img {
 .fade-in:nth-child(6) { animation-delay: 0.3s; }
 
 /* ============================================================
-   PRINT STYLES - EXACT GSP 2026 CERTIFICATE
-   ============================================================ */
+   PRINT STYLES - OFFICIAL A4 MARKSHEET
+   ============================================================  */
+
 @media print {
-    /* --- Hide Everything Except Marksheet --- */
-    .navbar,
-    .hero,
-    .hero-bg-animation,
-    .hero-stats-mini,
-    .hero-description,
-    .toppers-section,
-    .statistics-section,
-    .qr-scanner-section,
-    .qr-scanner-wrapper,
-    .scanner-box,
-    .scanner-controls-compact,
-    .scanner-status-box,
-    .about-section,
-    .footer,
-    .footer-content,
-    .footer-shortcuts,
-    .footer-bottom,
-    .back-top-btn,
-    .marksheet-actions,
-    .action-btn,
-    .print-btn,
-    .pdf-btn,
-    .share-btn,
-    .section-header,
-    .result-search-container,
-    .result-search-box,
-    .result-search-suggestions,
-    .result-placeholder,
-    #toastNotification,
-    .fade-in,
-    .result-rank-badge,
-    .result-status {
-        display: none !important;
-    }
 
-    /* --- Force Print Background Colors --- */
-    * {
-        -webkit-print-color-adjust: exact !important;
-        print-color-adjust: exact !important;
-        color-adjust: exact !important;
-    }
-
-    html, body {
-        margin: 0 !important;
-        padding: 0 !important;
-        background: white !important;
-        height: 100% !important;
-        width: 100% !important;
-        overflow: hidden !important;
-        color: #0a1628 !important;
-    }
-
-    /* --- Container Full Page --- */
-    .results-section {
-        display: block !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        background: white !important;
-        max-width: 100% !important;
-        min-height: 100vh !important;
-        height: 100% !important;
-        border-radius: 0 !important;
-        position: relative !important;
-        overflow: hidden !important;
-    }
-
-    .result-card-container {
-        display: block !important;
-        min-height: 100vh !important;
-        height: 100% !important;
-        padding: 0 !important;
-        margin: 0 !important;
-        overflow: hidden !important;
-    }
-
-    /* --- Marksheet Card - Full Page Red Border --- */
-    .result-card,
-    .marksheet-card {
-        display: block !important;
-        max-width: 100% !important;
-        width: 100% !important;
-        height: 100% !important;
-        min-height: 100vh !important;
-        margin: 0 !important;
-        padding: 25px 30px !important;
-        background: white !important;
-        border: 5px solid #CC0000 !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        page-break-after: avoid !important;
-        page-break-inside: avoid !important;
-        position: relative !important;
-        overflow: hidden !important;
-        box-sizing: border-box !important;
-    }
-
-    /* --- Watermark Logo --- */
-    .print-watermark-logo {
-        display: block !important;
-        position: absolute !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%) !important;
-        width: 300px !important;
-        height: 300px !important;
-        background-image: url('images\gsp-logo.png') !important;
-        background-size: contain !important;
-        background-repeat: no-repeat !important;
-        background-position: center !important;
-        opacity: 0.05 !important;
-        pointer-events: none !important;
-        z-index: 0 !important;
-    }
-
-    /* --- Headers --- */
-    .marksheet-header {
-        text-align: center !important;
-        padding-bottom: 6px !important;
-        border-bottom: 3px solid #CC0000 !important;
-        margin-bottom: 10px !important;
-        position: relative !important;
-        z-index: 1 !important;
-    }
-
-    .marksheet-institute h2 {
-        font-size: 2.2rem !important;
-        color: #CC0000 !important;
-        font-weight: 900 !important;
-        text-align: center !important;
-        letter-spacing: 3px !important;
-        margin: 0 !important;
-        text-transform: uppercase !important;
-        font-family: 'Inter', Arial, sans-serif !important;
-    }
-
-    .marksheet-institute1 h2 {
-        font-size: 2.2rem !important;
-        color: #3003ad !important;
-        font-weight: 900 !important;
-        text-align: center !important;
-        letter-spacing: 3px !important;
-        margin: 0 !important;
-        text-transform: uppercase !important;
-        font-family: 'Inter', Arial, sans-serif !important;
-    }
-
-    .marksheet-institute .sub-title {
-        color: #1a3a6b !important;
-        font-size: 0.9rem !important;
-        text-align: center !important;
-        margin: 2px 0 0 0 !important;
-        font-weight: 600 !important;
-        letter-spacing: 1px !important;
-    }
-
-    .marksheet-institute .ssrgsp-name {
-        margin-top: 4px !important;
-        font-size: 0.85rem !important;
-        color: #1a3a6b !important;
-        font-weight: 600 !important;
-    }
-
-    .marksheet-institute .ssrgsp-location {
-        font-size: 0.75rem !important;
-        color: #666 !important;
-        font-weight: 500 !important;
-    }
-
-    /* --- Student Summary --- */
-    .marksheet-student-summary {
-        background: #f8f4f0 !important;
-        border: 2px solid #CC0000 !important;
-        padding: 8px 20px !important;
-        margin: 8px 0 10px 0 !important;
-        border-radius: 4px !important;
-        position: relative !important;
-        z-index: 1 !important;
-    }
-
-    .marksheet-student-summary .summary-title {
-        font-size: 0.85rem !important;
-        font-weight: 800 !important;
-        color: #1a3a6b !important;
-        text-transform: uppercase !important;
-        letter-spacing: 1px !important;
-        margin-bottom: 2px !important;
-    }
-
-    .marksheet-student-summary .summary-row {
-        display: flex !important;
-        gap: 30px !important;
-        flex-wrap: wrap !important;
-    }
-
-    .marksheet-student-summary .summary-item .label {
-        color: #1a3a6b !important;
-        font-size: 0.75rem !important;
-        font-weight: 700 !important;
-        text-transform: uppercase !important;
-        opacity: 0.7 !important;
-    }
-
-    .marksheet-student-summary .summary-item .value {
-        color: #0a1628 !important;
-        font-size: 0.95rem !important;
-        font-weight: 700 !important;
-    }
-
-    /* --- Course Details --- */
-    .marksheet-course-details {
-        margin: 6px 0 10px 0 !important;
-        padding: 0 4px !important;
-        position: relative !important;
-        z-index: 1 !important;
-    }
-
-    .marksheet-course-details .course-label {
-        font-size: 0.75rem !important;
-        font-weight: 700 !important;
-        color: #1a3a6b !important;
-        text-transform: uppercase !important;
-        letter-spacing: 0.5px !important;
-    }
-
-    .marksheet-course-details .course-value {
-        font-size: 0.95rem !important;
-        font-weight: 700 !important;
-        color: #0a1628 !important;
-    }
-
-    /* --- Academic Records --- */
-    .marksheet-academic {
-        display: grid !important;
-        grid-template-columns: 1fr 1fr !important;
-        gap: 12px !important;
-        margin-bottom: 8px !important;
-        position: relative !important;
-        z-index: 1 !important;
-    }
-
-    .marksheet-semester {
-        background: #fafafa !important;
-        border: 2px solid #1a3a6b !important;
-        padding: 8px 12px !important;
-        border-radius: 4px !important;
-    }
-
-    .semester-header {
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        margin-bottom: 4px !important;
-        padding-bottom: 3px !important;
-        border-bottom: 2px solid #CC0000 !important;
-    }
-
-    .semester-header h4 {
-        font-size: 0.9rem !important;
-        font-weight: 900 !important;
-        color: #CC0000 !important;
-        margin: 0 !important;
-    }
-
-    .semester-status {
-        font-size: 0.65rem !important;
-        color: #1a3a6b !important;
-        background: #e8f0fe !important;
-        padding: 0 12px !important;
-        border-radius: 10px !important;
-        font-weight: 700 !important;
-    }
-
-    /* --- Table --- */
-    .marksheet-table {
-        width: 100% !important;
-        border-collapse: collapse !important;
-        font-size: 0.7rem !important;
-    }
-
-    .marksheet-table thead th {
-        text-align: left !important;
-        color: #1a3a6b !important;
-        border-bottom: 1.5px solid #1a3a6b !important;
-        padding: 3px 4px !important;
-        font-size: 0.6rem !important;
-        text-transform: uppercase !important;
-        font-weight: 800 !important;
-        letter-spacing: 0.3px !important;
-    }
-
-    .marksheet-table tbody td {
-        color: #0a1628 !important;
-        border-bottom: 1px solid #e0e0e0 !important;
-        padding: 2px 4px !important;
-        font-weight: 500 !important;
-        font-size: 0.7rem !important;
-    }
-
-    .marksheet-table tbody td strong {
-        color: #1a3a6b !important;
-        font-weight: 700 !important;
-    }
-
-    .marksheet-table tfoot td {
-        border-top: 1.5px solid #1a3a6b !important;
-        color: #0a1628 !important;
-        padding: 3px 4px !important;
-        font-weight: 700 !important;
-        font-size: 0.7rem !important;
-    }
-
-    .marksheet-table tfoot .status-pass {
-        color: #2e7d32 !important;
-        font-weight: 700 !important;
-    }
-
-    /* --- Grand Total --- */
-    .marksheet-grand-total {
-        background: #f0f4f8 !important;
-        border: 2px solid #CC0000 !important;
-        padding: 6px 20px !important;
-        margin: 6px 0 10px 0 !important;
-        border-radius: 4px !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        position: relative !important;
-        z-index: 1 !important;
-    }
-
-    .grand-label {
-        font-weight: 700 !important;
-        color: #1a3a6b !important;
-        font-size: 0.85rem !important;
-    }
-
-    .grand-value {
-        font-size: 1.2rem !important;
-        font-weight: 900 !important;
-        color: #CC0000 !important;
-    }
-
-    .grand-percentage {
-        font-size: 1.3rem !important;
-        font-weight: 900 !important;
-        color: #CC0000 !important;
-        background: none !important;
-        -webkit-text-fill-color: #CC0000 !important;
-    }
-
-    /* --- Footer --- */
-    .marksheet-footer {
-        border-top: 3px solid #CC0000 !important;
-        padding-top: 8px !important;
-        margin-bottom: 0 !important;
-        display: flex !important;
-        justify-content: space-between !important;
-        align-items: center !important;
-        position: relative !important;
-        z-index: 1 !important;
-    }
-
-    .footer-left {
-        flex: 0 0 auto !important;
-    }
-
-    .footer-center {
-        flex: 1 !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-
-    .footer-right {
-        flex: 0 0 auto !important;
-        text-align: right !important;
-    }
-
-    .sign-line span {
-        color: #0a1628 !important;
-        font-size: 0.7rem !important;
-        font-weight: 500 !important;
-        display: block !important;
-        line-height: 1.3 !important;
-    }
-
-    .footer-date {
-        color: #0a1628 !important;
-        font-size: 0.7rem !important;
-        font-weight: 500 !important;
-    }
-
-    /* --- QR Code --- */
-    .footer-qr {
-        display: flex !important;
-        flex-direction: row !important;
-        align-items: center !important;
-        gap: 10px !important;
-    }
-
-    .footer-qr #qrCodeContainer {
-        border: 1.5px solid #1a3a6b !important;
-        padding: 4px !important;
-        background: white !important;
-        width: 75px !important;
-        height: 75px !important;
-        flex-shrink: 0 !important;
-    }
-
-    .footer-qr #qrCodeContainer img,
-    .footer-qr #qrCodeContainer canvas {
-        width: 67px !important;
-        height: 67px !important;
-    }
-
-    .footer-qr .qr-label {
-        color: #1a3a6b !important;
-        font-size: 0.65rem !important;
-        font-weight: 700 !important;
-        letter-spacing: 0.5px !important;
-        text-transform: uppercase !important;
-        white-space: nowrap !important;
-    }
-
-    /* --- Page Settings --- */
     @page {
-        margin: 0.15in 0.15in !important;
-        size: A4 portrait !important;
+        size: A4 portrait;
+        margin: 0;
+    }
+
+    html,
+    body {
+        width: 210mm !important;
+        min-height: 297mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: #ffffff !important;
+        overflow: visible !important;
     }
 
     body {
-        background: white !important;
-        padding: 0 !important;
+        color: #303030 !important;
+    }
+
+    body * {
+        visibility: hidden !important;
+    }
+
+    .official-marksheet,
+    .official-marksheet * {
+        visibility: visible !important;
+    }
+
+    .official-marksheet {
+        position: absolute !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 210mm !important;
+        min-height: 297mm !important;
+        max-width: none !important;
         margin: 0 !important;
-        color: #0a1628 !important;
-        height: 100% !important;
+        padding: 7mm 7mm 5mm !important;
+        box-sizing: border-box !important;
+        background: #ffffff !important;
+        color: #303030 !important;
+        border: 1px solid #d9d9d9 !important;
+        border-radius: 0 !important;
+        box-shadow: none !important;
         overflow: hidden !important;
+        page-break-after: avoid !important;
+        page-break-inside: avoid !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
     }
 
-    html {
-        height: 100% !important;
-        overflow: hidden !important;
+    .no-print,
+    .marksheet-actions {
+        display: none !important;
+    }
+
+    .official-marksheet .marksheet-header {
+        padding-bottom: 2.5mm !important;
+        margin: 0 !important;
+        border: 0 !important;
+    }
+
+    .official-marksheet .marksheet-logo {
+        width: 43mm !important;
+        max-height: 40mm !important;
+        height: auto !important;
+        margin: 0 auto 1mm !important;
+    }
+
+    .official-marksheet .marksheet-header h1 {
+        margin: 0 !important;
+        font-size: 18pt !important;
+        line-height: 1.15 !important;
+        font-weight: 600 !important;
+    }
+
+    .official-marksheet .marksheet-location {
+        margin-top: 1mm !important;
+        font-size: 13pt !important;
+        line-height: 1.2 !important;
+    }
+
+    .official-marksheet .marksheet-student-summary {
+        margin-top: 2mm !important;
+        border: 1.5px solid #19a99c !important;
+        background: #19b8a8 !important;
+        page-break-inside: avoid !important;
+    }
+
+    .official-marksheet .summary-title {
+        padding: 2.5mm !important;
+        font-size: 15pt !important;
+    }
+
+    .official-marksheet .summary-row {
+        min-height: 16mm !important;
+        padding: 2mm 3.5mm !important;
+    }
+
+    .official-marksheet .summary-dot {
+        width: 3mm !important;
+        height: 3mm !important;
+        flex-basis: 3mm !important;
+        margin-right: 3.5mm !important;
+    }
+
+    .official-marksheet .summary-details {
+        font-size: 11.5pt !important;
+        line-height: 1.3 !important;
+    }
+
+    .official-marksheet .marksheet-section {
+        margin-top: 3.5mm !important;
+        page-break-inside: avoid !important;
+    }
+
+    .official-marksheet .marksheet-section-title {
+        margin: 0 0 1.5mm !important;
+        padding-left: 2mm !important;
+        border-left: 1.2mm solid #579c64 !important;
+        font-size: 16pt !important;
+        line-height: 1.15 !important;
+    }
+
+    .official-marksheet .personal-table {
+        font-size: 10pt !important;
+    }
+
+    .official-marksheet .personal-table th,
+    .official-marksheet .personal-table td {
+        padding: 1.7mm !important;
+    }
+
+    .official-marksheet .academic-records {
+        border: 1px solid #d8d8d8 !important;
+    }
+
+    .official-marksheet .term-title-row {
+        min-height: 8mm !important;
+    }
+
+    .official-marksheet .term-name {
+        padding: 1.4mm !important;
+        font-size: 10pt !important;
+    }
+
+    .official-marksheet .term-status {
+        padding: 1.4mm !important;
+        font-size: 9.5pt !important;
+    }
+
+    .official-marksheet .term-table-wrapper {
+        padding: 1.8mm 1.5mm 1.8mm 20% !important;
+    }
+
+    .official-marksheet .marksheet-table {
+        font-size: 9pt !important;
+    }
+
+    .official-marksheet .marksheet-table th,
+    .official-marksheet .marksheet-table td {
+        padding: 1.35mm 1.5mm !important;
+        line-height: 1.12 !important;
+    }
+
+    .official-marksheet .term-total-row {
+        min-height: 9mm !important;
+    }
+
+    .official-marksheet .term-total-box {
+        padding-right: 1.5mm !important;
+    }
+
+    .official-marksheet .term-total-box > span,
+    .official-marksheet .term-total-box > strong {
+        min-height: 6.5mm !important;
+        padding: .8mm 1.7mm !important;
+        font-size: 8.8pt !important;
+    }
+
+    .official-marksheet .grand-total-row {
+        min-height: 9mm !important;
+        padding: 0 1.5mm !important;
+        font-size: 10.5pt !important;
+    }
+
+    .official-marksheet .grand-total-row span {
+        margin-left: 20% !important;
+    }
+
+    .official-marksheet .marksheet-footer {
+        grid-template-columns: 1fr auto 1fr !important;
+        gap: 8mm !important;
+        margin-top: 3mm !important;
+        padding-top: 2mm !important;
+        font-size: 7pt !important;
+        page-break-inside: avoid !important;
+    }
+
+    .official-marksheet .qr-code-container {
+        width: 22mm !important;
+        height: 22mm !important;
+    }
+
+    .official-marksheet .qr-code-container img,
+    .official-marksheet .qr-code-container canvas {
+        width: 22mm !important;
+        height: 22mm !important;
+    }
+
+    .official-marksheet .qr-label {
+        font-size: 6.5pt !important;
+    }
+
+    .official-marksheet .sign-line {
+        gap: .6mm !important;
+    }
+
+    .official-marksheet .footer-date {
+        white-space: nowrap !important;
     }
 }
 
-/* --- Hide QR Label in Screen if not needed --- */
-.marksheet-footer .qr-label {
-    display: block;
-}
+@media screen and (max-width: 768px) {
 
-/* --- Responsive for Mobile Print --- */
-@media print and (max-width: 768px) {
-    .marksheet-card {
-        padding: 15px 18px !important;
-        border-width: 4px !important;
+    .official-marksheet {
+        margin: 20px auto;
+        padding: 18px;
+        border-radius: 8px;
     }
 
-    .marksheet-institute h2 {
-        font-size: 1.4rem !important;
-        letter-spacing: 1px !important;
+    .official-marksheet .marksheet-logo {
+        width: 190px;
     }
 
-    .marksheet-institute .sub-title {
-        font-size: 0.7rem !important;
+    .official-marksheet .marksheet-header h1 {
+        font-size: 21px;
     }
 
-    .marksheet-institute .ssrgsp-name {
-        font-size: 0.7rem !important;
+    .official-marksheet .marksheet-location {
+        font-size: 17px;
     }
 
-    .marksheet-institute .ssrgsp-location {
-        font-size: 0.6rem !important;
+    .official-marksheet .summary-title {
+        font-size: 20px;
     }
 
-    .marksheet-student-summary {
-        padding: 6px 14px !important;
+    .official-marksheet .summary-details {
+        font-size: 15px;
     }
 
-    .marksheet-student-summary .summary-row {
-        flex-direction: column !important;
-        gap: 4px !important;
+    .official-marksheet .summary-item {
+        flex-wrap: wrap;
     }
 
-    .marksheet-student-summary .summary-item .value {
-        font-size: 0.85rem !important;
+    .official-marksheet .marksheet-section-title {
+        font-size: 22px;
     }
 
-    .marksheet-academic {
-        grid-template-columns: 1fr !important;
-        gap: 8px !important;
+    .official-marksheet .term-title-row,
+    .official-marksheet .term-total-row {
+        grid-template-columns: 1fr;
     }
 
-    .marksheet-semester {
-        padding: 6px 8px !important;
+    .official-marksheet .term-status {
+        border-left: 0;
+        border-top: 1px solid #d8d8d8;
     }
 
-    .marksheet-grand-total {
-        flex-direction: column !important;
-        text-align: center !important;
-        gap: 4px !important;
-        padding: 6px 12px !important;
+    .official-marksheet .term-table-wrapper {
+        padding: 8px;
+        overflow-x: auto;
     }
 
-    .grand-value {
-        font-size: 1rem !important;
+    .official-marksheet .marksheet-table {
+        min-width: 560px;
     }
 
-    .grand-percentage {
-        font-size: 1.1rem !important;
+    .official-marksheet .term-total-box {
+        justify-content: flex-end;
+        padding: 7px;
     }
 
-    .marksheet-footer {
-        flex-direction: column !important;
-        text-align: center !important;
-        gap: 6px !important;
+    .official-marksheet .grand-total-row span {
+        margin-left: 0;
     }
 
-    .footer-center {
-        order: -1 !important;
+    .official-marksheet .marksheet-footer {
+        grid-template-columns: 1fr;
+        text-align: center;
+        gap: 10px;
     }
 
-    .footer-left,
-    .footer-right {
-        text-align: center !important;
+    .official-marksheet .footer-left,
+    .official-marksheet .footer-right {
+        text-align: center;
     }
 
-    .footer-qr {
-        flex-direction: row !important;
-        gap: 8px !important;
-        justify-content: center !important;
+    .official-marksheet .footer-center {
+        order: -1;
     }
 
-    .footer-qr #qrCodeContainer {
-        width: 60px !important;
-        height: 60px !important;
+    .multiple-results-grid {
+        grid-template-columns: 1fr;
     }
-
-    .footer-qr #qrCodeContainer img,
-    .footer-qr #qrCodeContainer canvas {
-        width: 52px !important;
-        height: 52px !important;
-    }
-
-    .footer-qr .qr-label {
-        font-size: 0.55rem !important;
-    }
-
-    .print-watermark-logo {
-        width: 180px !important;
-        height: 180px !important;
-    }
-
-    @page {
-        margin: 0.1in 0.08in !important;
-    }
-}
+} 
